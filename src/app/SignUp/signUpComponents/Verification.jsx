@@ -1,0 +1,23 @@
+import AuthProfile from '@/app/components/AuthProfile'
+import Link from 'next/link'
+import React from 'react'
+
+const Verification = ({title}) => {
+  return (
+    <div className='pt-10 px-0'>
+        <AuthProfile title="Verification Code"/>
+        <p className='text-[#4B2417] text-sm'>We have sent a verification code to your email address</p>
+        <div className='flex py-6 gap-2'>
+            <input className='bg-white py-2  rounded-md w-10' type="text"  />
+            <input className='bg-white py-2  rounded-md w-10' type="text"  />
+            <input className='bg-white py-2  rounded-md w-10' type="text"  />
+            <input className='bg-white py-2  rounded-md w-10' type="text"  />
+            <input className='bg-white py-2  rounded-md w-10' type="text"  />
+        </div>
+        <p>I didn’t receive a code <span className='font-[800] text-[#4B2417]'><Link  href="/resend">Resend</Link></span></p>
+      
+    </div>
+  )
+}
+
+export default Verification
