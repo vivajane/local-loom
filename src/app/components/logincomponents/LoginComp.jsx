@@ -48,7 +48,7 @@ const LoginComp = ({ title, checkShow }) => {
         </button>
         <p className="text-[#4B2417] font-[400px]">
           Don't have an account ?{" "}
-          <Link className="text-[#4B2417] font-bold" href="/pages/login">
+          <Link className="text-[#4B2417] font-bold" href="/pages/signup">
             Sign Up
           </Link>
         </p>

@@ -11,6 +11,7 @@ import LoginComp from '@/app/components/logincomponents/LoginComp'
 import ForgotPassword from '../forgotpassword/page'
 import ResetOne from '@/app/components/logincomponents/ResetOne'
 import GetOtp from '@/app/components/logincomponents/GetOtp'
+import ResetPasword from '@/app/components/logincomponents/ResetPasword'
 
 
 const Login = () => {
@@ -29,7 +30,8 @@ const Login = () => {
         </header>
         <section className='flex justify-between gap-20'>
             <div>{show === 1 && <ResetOne  checkShow={checkShow}/> }</div>
-            <div>{show === 2 && <GetOtp  checkShow={checkShow}/> }</div>
+            {/* <div>{show === 2 && <GetOtp  checkShow={checkShow}/> }</div> */}
+            <div>{show === 2 && <ResetPasword  checkShow={checkShow}/> }</div>
            
             
             <div className='pt-24 flex-shrink-0'>

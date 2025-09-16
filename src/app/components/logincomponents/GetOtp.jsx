@@ -1,5 +1,6 @@
 import React from 'react'
 import AuthProfile from '../AuthProfile'
+import Link from 'next/link'
 
 const GetOtp = ({title, checkShow}) => {
   return (
