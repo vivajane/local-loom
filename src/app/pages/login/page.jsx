@@ -27,7 +27,7 @@ const Login = () => {
         </header>
         <section className='flex justify-between gap-20'>
             <div>{show === 1 && <LoginComp  checkShow={checkShow}/> }</div>
-            <div>{show === 2 && <ForgotPassword checkShow={checkShow}/> }</div>
+            {/* <div>{show === 2 && <ForgotPassword checkShow={checkShow}/> }</div> */}
             {/* <div>{pathname.includes("forgotPassword") && <ForgotPassword checkShow={checkShow} />}</div> */}
             <div className='pt-24 flex-shrink-0'>
                 <Image src={pot} alt="pot" width={400}/>

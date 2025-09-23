@@ -1,38 +1,57 @@
-"use client"
-import Image from 'next/image'
-import React from 'react'
-import logo from "../../../../public/images/logo.png"
-import pot from "../../../../public/images/pot.png"
-import { useState } from 'react'
-import CreateAcctount from '../../SignUp/signUpComponents/CreateAcctount'
-import Verification from '@/app/SignUp/signUpComponents/Verification'
-import Link from 'next/link'
-
+"use client";
+import Image from "next/image";
+import React from "react";
+import logo from "../../../../public/images/logo.png";
+import pot from "../../../../public/images/pot.png";
+import { useState } from "react";
+import CreateAcctount from "../../SignUp/signUpComponents/CreateAcctount";
+import Verification from "@/app/SignUp/signUpComponents/Verification";
+import Link from "next/link";
+import Loading from "@/app/components/Loading";
 
 const SignUp = () => {
-    const [show, setShow] = useState(1)
+  const [show, setShow] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-    const checkShow = () => {
-        setShow((prev) => prev +1)
-    }
+  const checkShow = () => {
+    setShow((prev) => prev + 1);
+  };
   return (
-    <div className='bg-[#F0E0D0] h-screen px-26 pt-6'>
-        <header className='flex justify-between items-center'>
-            <Image src={logo} alt="logo" width={100}   />
-            <button className='bg-[#4B2417] text-white px-6 py-2 rounded-md'><Link href="/pages/login">Login</Link></button>
-            
-        </header>
-        <section className='flex justify-between gap-20'>
-            <div>{show === 1 && <CreateAcctount  checkShow={checkShow}/> }</div>
-            <div>{show === 2 && <Verification checkShow={checkShow}/> }</div>
-            <div className='pt-24 flex-shrink-0'>
-                <Image src={pot} alt="pot" width={400}/>
-            </div>
-        </section>
-
-      
+    <div className="bg-[#F0E0D0] h-screenn lg:px-26 md:px-16 px-8 pt-6">
+      {loading && <Loading />}
+      <header className="flex justify-between items-center">
+        <Image src={logo} alt="logo" width={100} />
+        <button className="bg-[#4B2417] text-white px-6 py-2 rounded-md">
+          <Link href="/pages/login">Login</Link>
+        </button>
+      </header>
+      <section className="md:flex h-screen justify-between gap-20 lg:gap-30">
+        <div>
+          <div>
+            {show === 1 && (
+              <CreateAcctount
+                loading={loading}
+                setLoading={setLoading}
+                checkShow={checkShow}
+              />
+            )}
+          </div>
+          <div>
+            {show === 2 && (
+              <Verification
+                loading={loading}
+                setLoading={setLoading}
+                checkShow={checkShow}
+              />
+            )}
+          </div>
+        </div>
+        <div className="pt-24 md:w-1/2 hidden md:block md:flex-shrink-0">
+          <Image src={pot} alt="pot" width={400} />
+        </div>
+      </section>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

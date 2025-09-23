@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Geist } from "next/font/google";
 import { Bricolage_Grotesque } from "next/font/google";
@@ -6,35 +7,99 @@ import Link from "next/link";
 import Image from "next/image";
 import google from "../../../../public/images/google.png";
 import eye from "../../../../public/images/eye.png";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { login } from "../api/login";
+import { getProfile } from "../api/profile";
 
 const LoginComp = ({ title, checkShow }) => {
+  const [detail, setDetail] = useState({
+    email: "",
+    password: "",
+  });
+  const [keepMeSignedIn, setKeepMeSignedIn] = useState(false);
+  const router = useRouter();
+
+  const onChangeHandler = (e) => {
+    setDetail({
+      ...detail,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmitHandler = async (e) => {
+  e.preventDefault();
+  try {
+    const payLoad = {
+      identifier: detail.email,
+      password: detail.password,
+    };
+
+    const response = await login(payLoad);
+
+    if (response.status === 200 || response.status === 201) {
+      const { access, refresh } = response.data;
+
+      // store tokens first
+      if (keepMeSignedIn) {
+        localStorage.setItem("access", access);
+        localStorage.setItem("refresh", refresh);
+      } else {
+        sessionStorage.setItem("access", access);
+        sessionStorage.setItem("refresh", refresh);
+      }
+
+      // now fetch profile
+      const profile = await getProfile(access);
+
+      // save role/email from profile
+      localStorage.setItem("role", profile.role);
+      localStorage.setItem("email", profile.email);
+
+      console.log("Profile loaded:", profile);
+    }
+  } catch (error) {
+    console.log(error, "from login");
+  }
+};
+
   return (
     <div className="pt-10">
       <AuthProfile title="Login" />
-      <form className="space-y-4 py-6 w-full">
+      <form onSubmit={onSubmitHandler} className="space-y-4 py-6 w-full">
         <input
+          onChange={onChangeHandler}
           className="bg-white py-2 px-4 rounded-md w-full"
           type="email"
           name="email"
           id="email"
+          value={detail.email}
           placeholder="Email"
         />
         <input
+          onChange={onChangeHandler}
           className="bg-white py-2  px-4 rounded-md w-full"
           type="password"
           name="password"
           id="password"
+          value={detail.password}
           placeholder="Password"
         />
         <div className="flex justify-between">
           <div className="flex gap-4">
-            <input type="checkbox" name="checkbox" id="checkbox" />
+            <input
+              type="checkbox"
+              value={keepMeSignedIn}
+              onChange={(e) => setKeepMeSignedIn(e.target.checked)}
+              name="checkbox"
+              id="checkbox"
+            />
             <label htmlFor="checkbox">Keep me signed in</label>
           </div>
           <Link href="/pages/forgotpassword">Forgot Password</Link>
         </div>
         <button
-          onClick={checkShow}
+        
           className="bg-[#4B2417] text-white px-4 py-2 mt-3 rounded-md w-full"
         >
           Login
