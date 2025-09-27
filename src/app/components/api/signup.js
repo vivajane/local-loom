@@ -1,9 +1,9 @@
-import axios from "axios";
+import api from "./axios";
 
 export const signup = async (data) => {
   try {
-    const response = await axios.post(
-      "https://localoom-backend.onrender.com/api/accounts/register/",
+    const response = await api.post(
+      "/register/",
       data,
       {
         headers: {

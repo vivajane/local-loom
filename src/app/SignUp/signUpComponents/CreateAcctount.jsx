@@ -60,6 +60,7 @@ const CreateAcctount = ({title, loading, setLoading, checkShow}) => {
       const user = localStorage.getItem("role")
       const payLoad = {
         role: user,
+      
         ...details
       }
       

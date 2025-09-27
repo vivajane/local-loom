@@ -11,8 +11,10 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { login } from "../api/login";
 import { getProfile } from "../api/profile";
+import { toast } from "react-toastify";
+import { ForgottenPassword } from "../api/forgotPassword";
 
-const LoginComp = ({ title, checkShow }) => {
+const LoginComp = ({ title, checkShow, loading, setLoading }) => {
   const [detail, setDetail] = useState({
     email: "",
     password: "",
@@ -28,43 +30,65 @@ const LoginComp = ({ title, checkShow }) => {
   };
 
   const onSubmitHandler = async (e) => {
-  e.preventDefault();
-  try {
-    const payLoad = {
-      identifier: detail.email,
-      password: detail.password,
-    };
+    e.preventDefault();
 
-    const response = await login(payLoad);
-
-    if (response.status === 200 || response.status === 201) {
-      const { access, refresh } = response.data;
-
-      // store tokens first
-      if (keepMeSignedIn) {
-        localStorage.setItem("access", access);
-        localStorage.setItem("refresh", refresh);
-      } else {
-        sessionStorage.setItem("access", access);
-        sessionStorage.setItem("refresh", refresh);
-      }
-
-      // now fetch profile
-      const profile = await getProfile(access);
-
-      // save role/email from profile
-      localStorage.setItem("role", profile.role);
-      localStorage.setItem("email", profile.email);
-
-      console.log("Profile loaded:", profile);
+    if (!detail.email || !detail.password) {
+      toast.error("All fields are required");
+      return;
     }
-  } catch (error) {
-    console.log(error, "from login");
-  }
-};
+    try {
+      setLoading(true);
+      const payLoad = {
+        identifier: detail.email,
+        password: detail.password,
+      };
+
+      const response = await login(payLoad);
+      if (!response) {
+        toast.error("Invalid Credentials");
+        setLoading(false);
+        return;
+      }
+      router.push("/");
+
+      if (response.status === 200 || response.status === 201) {
+        const { access, refresh } = response.data;
+
+        // store tokens first
+        if (keepMeSignedIn) {
+          localStorage.setItem("access", access);
+          localStorage.setItem("refresh", refresh);
+        } else {
+          sessionStorage.setItem("access", access);
+          sessionStorage.setItem("refresh", refresh);
+        }
+
+        // fetch profile
+        const profile = await getProfile(access);
+
+        // save role/email from profile
+        localStorage.setItem("role", profile.role);
+        localStorage.setItem("email", profile.email);
+
+        console.log("Profile loaded:", profile);
+      }
+    } catch (error) {
+      console.log(error, "from login");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // for Forgotten Password
+
+  const ForgottenPassword = async () => {
+    try {
+      const response = await ForgottenPassword(detail.email);
+    } catch (error) {}
+  };
 
   return (
-    <div className="pt-10">
+    <div className="pt-20">
       <AuthProfile title="Login" />
       <form onSubmit={onSubmitHandler} className="space-y-4 py-6 w-full">
         <input
@@ -85,8 +109,8 @@ const LoginComp = ({ title, checkShow }) => {
           value={detail.password}
           placeholder="Password"
         />
-        <div className="flex justify-between">
-          <div className="flex gap-4">
+        <div className=" text-xs flex justify-between">
+          <div className="flex lg:gap-2 gap-1">
             <input
               type="checkbox"
               value={keepMeSignedIn}
@@ -98,10 +122,7 @@ const LoginComp = ({ title, checkShow }) => {
           </div>
           <Link href="/pages/forgotpassword">Forgot Password</Link>
         </div>
-        <button
-        
-          className="bg-[#4B2417] text-white px-4 py-2 mt-3 rounded-md w-full"
-        >
+        <button className="bg-[#4B2417] text-white px-4 py-2 mt-3 rounded-md w-full">
           Login
         </button>
         <p className="text-center">Or</p>

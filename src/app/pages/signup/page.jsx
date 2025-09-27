@@ -17,14 +17,14 @@ const SignUp = () => {
     setShow((prev) => prev + 1);
   };
   return (
-    <div className="bg-[#F0E0D0] h-screenn lg:px-26 md:px-16 px-8 pt-6">
+    <div className="bg-[#F0E0D0] h-screen lg:px-26 md:px-16 px-8 py-6">
       {loading && <Loading />}
-      <header className="flex justify-between items-center">
+      {/* <header className="flex justify-between items-center">
         <Image src={logo} alt="logo" width={100} />
         <button className="bg-[#4B2417] text-white px-6 py-2 rounded-md">
           <Link href="/pages/login">Login</Link>
         </button>
-      </header>
+      </header> */}
       <section className="md:flex h-screen justify-between gap-20 lg:gap-30">
         <div>
           <div>

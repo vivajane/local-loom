@@ -9,27 +9,30 @@ import CreateAcctount from '../../SignUp/signUpComponents/CreateAcctount'
 import Verification from '@/app/SignUp/signUpComponents/Verification'
 import LoginComp from '@/app/components/logincomponents/LoginComp'
 import ForgotPassword from '../forgotpassword/page'
+import Loading from '@/app/components/Loading'
 
 
 const Login = () => {
     const [show, setShow] = useState(1)
+    const [loading, setLoading] = useState(false)
     const pathname = usePathname()
 
     const checkShow = () => {
         setShow((prev) => prev +1)
     }
   return (
-    <div className='bg-[#F0E0D0] h-screen px-26 pt-6'>
-        <header className='flex justify-between items-center'>
+    <div className='bg-[#F0E0D0] h-screen lg:px-26 md:px-16 px-8 py-8'>
+        {loading && <Loading />}
+        {/* <header className='flex justify-between items-center'>
             <Image src={logo} alt="logo" width={100}   />
             <button className='bg-[#4B2417] text-white px-6 py-2 rounded-md'>Login</button>
             
-        </header>
-        <section className='flex justify-between gap-20'>
-            <div>{show === 1 && <LoginComp  checkShow={checkShow}/> }</div>
+        </header> */}
+        <section className='md:flex h-screen justify-between gap-20 lg:gap-30'>
+            <div>{show === 1 && <LoginComp  loading={loading} setLoading={setLoading} checkShow={checkShow}/> }</div>
             {/* <div>{show === 2 && <ForgotPassword checkShow={checkShow}/> }</div> */}
             {/* <div>{pathname.includes("forgotPassword") && <ForgotPassword checkShow={checkShow} />}</div> */}
-            <div className='pt-24 flex-shrink-0'>
+            <div className='pt-24 md:w-1/2 hidden md:block md:flex-shrink-0'>
                 <Image src={pot} alt="pot" width={400}/>
             </div>
         </section>

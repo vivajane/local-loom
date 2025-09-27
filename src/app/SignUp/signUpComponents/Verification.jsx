@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import { verifyOtp } from "@/app/components/api/verifyotp";
 import { resendOtp } from "@/app/components/api/ResendOtp";
 import { toast } from "react-toastify";
+import Loading from "@/app/components/Loading";
 
-const Verification = ({ title }) => {
+const Verification = ({ title, loading, setLoading }) => {
   const [otp, setOtp] = useState({
     first: "",
     second: "",
@@ -18,7 +19,7 @@ const Verification = ({ title }) => {
     sixth: "",
   });
   const [timer, setTimer ] = useState(60);
-  const [loading, setLoading] = useState(false);
+ 
   const router = useRouter();
   const onChangeHandler = (e) => {
     setOtp({
@@ -38,6 +39,7 @@ const Verification = ({ title }) => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true)
       const identifier = localStorage.getItem("email");
       const newOtp = Object.values(otp).join("") 
 
@@ -52,6 +54,8 @@ const Verification = ({ title }) => {
       }
     } catch (error) {
       console.log(error, "from verify otp form");
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -76,7 +80,7 @@ const Verification = ({ title }) => {
   }
   return (
     <div className="pt-10 px-0">
-      {loading && <p className="text-[#4B2417] text-sm">Loading...</p>}
+    
       <AuthProfile title="Verification Code" />
       <p className="text-[#4B2417] text-sm">
         We have sent a verification code to your email address

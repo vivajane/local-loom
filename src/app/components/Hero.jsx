@@ -5,10 +5,7 @@ import { useRouter } from "next/navigation";
 
 const Hero = () => {
     const router = useRouter();
-    const onClickSignup = () => {
-        router.push("/pages/signup")
-        localStorage.setItem("role", "BUYER");
-    }
+
     const onClickLogin = () => {
         router.push("/pages/login");
     }
@@ -18,10 +15,10 @@ const Hero = () => {
         This is the home page, still in progress
       </h1>
       <div className="flex justify-center space-x-4 mt-8">
-        <button  onClick={onClickSignup} className="mt-5 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+        <button  onClick={onClickBuyer} className="mt-5 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
           SignUp as a buyer
         </button>
-        <button onClick={onClickSignup} className="mt-5 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+        <button onClick={onClickArtisan} className="mt-5 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
           SignUp as a Artisan
         </button>
         <button onClick={onClickLogin} className="mt-5 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">

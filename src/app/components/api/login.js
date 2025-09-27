@@ -1,9 +1,9 @@
-import axios from "axios";
+import api from "./axios";
 
 export const login = async (data) => {
     try {
-        const response = await axios.post(
-            "https://localoom-backend.onrender.com/api/accounts/login/",
+        const response = await api.post(
+            "/login/",
             data,
             {
                 headers: {

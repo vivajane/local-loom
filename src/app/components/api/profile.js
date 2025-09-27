@@ -1,12 +1,13 @@
-import axios from "axios";
+import api from "./axios"
 export const getProfile = async(access) =>{
     try {
-        const response = axios.get("https://localoom-backend.onrender.com/api/accounts/profile",data,{
+        const response = api.get("/profile/",data,{
             headers: {
                 "authorization": `Bearer ${access}`,
             },
 
         })
+        return response
     } catch (error) {
         
     }

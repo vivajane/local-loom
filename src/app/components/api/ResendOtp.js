@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "./axios";
 
 export const resendOtp = async () => {
   try {
@@ -8,7 +8,7 @@ export const resendOtp = async () => {
       throw new Error("No email found in localStorage");
     }
 
-    const response = await axios.post("https://localoom-backend.onrender.com/api/accounts/resend-signup-otp/", {
+    const response = await api.post("/resend-signup-otp/", {
       identifier: email,
     });
 

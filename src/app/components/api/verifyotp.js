@@ -1,8 +1,8 @@
-import axios from "axios";
+import api from "./axios"
 
 export const verifyOtp = async(data) => {
    try {
-     const response = await axios.post("https://localoom-backend.onrender.com/api/accounts/verify-otp/ ", data,{
+     const response = await api.post("/verify-otp/", data,{
         headers: {
             "Content-Type": "application/json",
         },
