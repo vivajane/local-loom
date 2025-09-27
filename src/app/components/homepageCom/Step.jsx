@@ -11,14 +11,12 @@ const bricolage = Bricolage_Grotesque({
 });
 const Step = () => {
     const router = useRouter();
-  const onClickBuyer = () => {
-    router.push("/pages/signup");
-    localStorage.setItem("role", "BUYER");
-  };
-  const onClickArtisan = () => {
-    router.push("/pages/signup");
-    localStorage.setItem("role", "ARTISAN");
-  };
+ 
+
+  const handleClick = () => {
+    localStorage.setItem("role", role)
+    router.push(`/signup?role=${role}`)
+  }
   return (
     <div
       className={`${bricolage.className} relative  py-40 bg-cover bg-no-repeat w-full bg-center h-[500px]`}
@@ -31,13 +29,13 @@ const Step = () => {
         </h1>{" "}
         <div className="sm:flex px-10 justify-center space-x-4 mt-8">
           <button
-            onClick={onClickBuyer}
+            onClick={() => handleClick("BUYER")}
             className="mt-5 px-3 md:px-6 py-3 shadow-neutral-50 shadow-md cursor-pointer bg-[#4B2417] text-[#FFFFFFCC] rounded-lg transition"
           >
             SHOW NOW
           </button>
           <button
-            onClick={onClickArtisan}
+            onClick={() => handleClick("ARTISAN")}
             className="mt-5 px-3 md:px-6 py-3 border border-[#4B2417] cursor-pointer bg-[#F0E0D0] text-[#4B2417] rounded-lg transition"
           >
             SELL ON LOCALLOOM

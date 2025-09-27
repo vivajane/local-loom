@@ -79,7 +79,7 @@ const Verification = ({ title, loading, setLoading }) => {
 
   }
   return (
-    <div className="pt-10 px-0">
+    <div className="pt-40 px-0">
     
       <AuthProfile title="Verification Code" />
       <p className="text-[#4B2417] text-sm">
