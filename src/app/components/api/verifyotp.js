@@ -1,8 +1,8 @@
-import api from "./axios"
+import httpClient from "./axios"
 
 export const verifyOtp = async(data) => {
    try {
-     const response = await api.post("/verify-otp/", data,{
+     const response = await httpClient.post("/api/accounts/verify-otp/", data,{
         headers: {
             "Content-Type": "application/json",
         },

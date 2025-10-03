@@ -8,7 +8,7 @@ const bricolage = Bricolage_Grotesque({
 })
 const StayConnected = () => {
   return (
-    <div className={`text-center bg-[#FBF5EB] mx-auto py-6 ${bricolage.className}`}>
+    <div className={`text-center bg-[#F0E0D0] mx-auto py-12 ${bricolage.className}`}>
         <h1 className='font-extrabold text-2xl'>Stay Connected</h1>
         <p>Get exclusive offers and updates on new artisan creations</p>
         <form action="">

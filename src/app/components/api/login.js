@@ -1,8 +1,9 @@
-import api from "./axios";
+// import axios from "axios";
+import httpClient from "./axios";
 
 export const login = async (data) => {
   try {
-    const response = await api.post("/login/", data, {
+    const response = await httpClient.post(`/api/accounts/login/`, data, {
       headers: {
         "Content-Type": "application/json",
       },

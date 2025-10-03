@@ -1,4 +1,4 @@
-import api from "./axios";
+import httpClient from "./axios";
 
 export const resendOtp = async () => {
   try {
@@ -8,7 +8,7 @@ export const resendOtp = async () => {
       throw new Error("No email found in localStorage");
     }
 
-    const response = await api.post("/resend-signup-otp/", {
+    const response = await httpClient.post("/api/accounts/resend-signup-otp/", {
       identifier: email,
     });
 

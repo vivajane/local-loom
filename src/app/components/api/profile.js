@@ -1,7 +1,7 @@
-import api from "./axios"
+import httpClient from "./axios"
 export const getProfile = async(access) =>{
     try {
-        const response = api.get("/profile/",data,{
+        const response = httpClient.get("/api/accounts/profile/",{
             headers: {
                 "authorization": `Bearer ${access}`,
             },

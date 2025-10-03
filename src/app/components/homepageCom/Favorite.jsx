@@ -44,7 +44,7 @@ const favourites = [
 
 const Favourite = () => {
   return (
-    <div className={` px-10 py-10 bg-[#FBF5EB] ${bricolage.className}`}>
+    <div className={` px-10 py-10 bg-[#F0E0D0]   ${bricolage.className}`}>
       <h1 className="font-extrabold py-2 text-2xl md:text-4xl text-center">
         FAVOURITE PICKS
       </h1>
@@ -52,7 +52,7 @@ const Favourite = () => {
         Discover our customers Favorite
       </h1>
 
-      <div className="lg:px-60 md:px-30 sm:px-20 bg-[#FBF5EB]  grid md:grid-cols-3 sm:grid-cols-3 grid-cols-2 sm:gap-10  gap-4 py-10">
+      <div className="lg:px-60 md:px-30 sm:px-20 grid md:grid-cols-3 sm:grid-cols-3 grid-cols-2 sm:gap-10  gap-4 py-10">
         {favourites.map((favour) => {
           return (
             <div key={favour.id}>

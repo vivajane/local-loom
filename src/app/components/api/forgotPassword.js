@@ -1,8 +1,9 @@
-import api from "./axios";
+import axios from "axios";
+import httpClient from "./axios";
 
-export const ForgottenPassword = async() => {
+export const ForgottenPassword = async(data) => {
   try {
-      const res = await api.post("/forgot-password/", data,{
+      const res = await httpClient.post("/api/accounts/forgot-password/", data, {
         headers: {
             "Content-Type": "application/json",
         },

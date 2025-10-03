@@ -71,7 +71,7 @@ const bricolage = Bricolage_Grotesque({
 });
 const Why = () => {
   return (
-    <div className={`bg-[#FBF5EB] px-10 py-10 ${manrope.className}`}>
+    <div className={`bg-[#F0E0D0] px-10 py-10 ${manrope.className}`}>
       <div>
         <h1 className="font-extrabold py-2 text-2xl md:text-4xl">
           Why Choose LocalLoom?
@@ -79,17 +79,18 @@ const Why = () => {
         <p className="text-[#1C120D] text-base">
           Experience the difference of handmade goods
         </p>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-14 py-10">
+        <div className="md:grid lg:grid-cols-3  md:grid-cols-2 flex overflow-x-scroll gap-14 py-10">
           {products.map((product) => {
             return (
-              <div key={product.id}>
+              <div className="flex flex-col items-center" key={product.id}>
                 <Product product={product} />
               </div>
-            );
+            )
+          
           })}
         </div>
       </div>
-      <div className="sm:flex block gap-10">
+      <div className="md:flex sm:pt-10 pt-10 block gap-10">
         <div
           className="relative bg-cover bg-no-repeat w-56 bg-center h-[400px]"
           style={{ backgroundImage: `url(${whitevase.src})` }}
@@ -106,7 +107,7 @@ const Why = () => {
             </div>
           </div>
         </div>
-        <div className="md:grid lg:grid-cols-4 md:grid-cols-3 hidden gap-2 py-10">
+        <div className="sm:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 hidden gap-2 py-10">
           {
             crafts.map((craft) => {
               return (
@@ -117,16 +118,18 @@ const Why = () => {
             })
           }
         </div>
-        <div className="grid sm:grid-cols-2 grid-cols-1 space-y-3 md:hidden gap-2 py-10">
-          {
+        <div className=" py-10">
+         <div className="flex overflow-x-scroll space-y-3 sm:hidden gap-6">
+           {
             crafts.map((craft) => {
               return (
-                <div key={craft.id}>
+                <div className="min-w-[200px]" key={craft.id}>
                   <Crafts craft={craft} />
                 </div>
               );
             })
           }
+         </div>
         </div>
       </div>
       <hr className="my-10 text-[#4B2417]" />
@@ -136,7 +139,7 @@ const Why = () => {
 
 const Product = ({ product }) => {
   return (
-    <div className="bg-[#FAFAF7] lg:h-50 md:h-52  h-40 rounded-md shadow-amber-950 shadow-md p-6 space-y-2 border border-[#4B2417] ">
+    <div className="bg-[#FAFAF7] h-80 sm:h-auto rounded-md shadow-amber-950 shadow-md p-6 space-y-2 border border-[#4B2417] ">
       <div className="text-[#4B2417]">{product.icon}</div>
       <h1 className="font-bold md:text-xl">{product.title}</h1>
       <p className="text-[#94664F] font-medium text-base">{product.desc}</p>

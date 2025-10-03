@@ -32,7 +32,7 @@ const Header = () => {
   };
   return (
     <header
-      className={`w-screen fixed z-20 top-0   bg-[#FBF5EB]  ${jarkata.className} py-6 font-semibold  `}
+      className={`w-screen fixed z-20 top-0 border-b border-b-[#486284]  bg-[#F0E0D0]  ${jarkata.className} py-6 font-semibold  `}
     >
       <div className="flex text-[#3F2010]  px-8 justify-between items-center">
         <div>

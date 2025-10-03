@@ -1,9 +1,9 @@
-import api from "./axios";
+import httpClient from "./axios";
 
 export const signup = async (data) => {
   try {
-    const response = await api.post(
-      "/register/",
+    const response = await httpClient.post(
+      "/api/accounts/register/",
       data,
       {
         headers: {

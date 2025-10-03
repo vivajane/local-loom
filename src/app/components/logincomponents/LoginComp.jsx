@@ -49,6 +49,7 @@ const LoginComp = ({ title, checkShow, loading, setLoading }) => {
         setLoading(false);
         return;
       }
+      toast.success("Login successful");
       router.push("/");
 
       if (response.status === 200 || response.status === 201) {

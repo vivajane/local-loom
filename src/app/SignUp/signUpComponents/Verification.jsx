@@ -18,8 +18,8 @@ const Verification = ({ title, loading, setLoading }) => {
     fifth: "",
     sixth: "",
   });
-  const [timer, setTimer ] = useState(60);
- 
+  const [timer, setTimer] = useState(60);
+
   const router = useRouter();
   const onChangeHandler = (e) => {
     setOtp({
@@ -30,23 +30,23 @@ const Verification = ({ title, loading, setLoading }) => {
   };
 
   useEffect(() => {
-    if(timer > 0){
+    if (timer > 0) {
       const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
       return () => clearInterval(interval);
     }
-  },[])
+  }, []);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true)
+      setLoading(true);
       const identifier = localStorage.getItem("email");
-      const newOtp = Object.values(otp).join("") 
+      const newOtp = Object.values(otp).join("");
 
-      const payLoad={
+      const payLoad = {
         identifier,
-        otp: newOtp
-      }
+        otp: newOtp,
+      };
       const response = await verifyOtp(payLoad);
       console.log(response, "from verify otp form");
       if (response?.status === 200 || response?.status === 201) {
@@ -54,41 +54,38 @@ const Verification = ({ title, loading, setLoading }) => {
       }
     } catch (error) {
       console.log(error, "from verify otp form");
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
-  const resendOTP = async(e) => {
+  const resendOTP = async (e) => {
     e.preventDefault();
 
     try {
-      setLoading(true)
-      const identifier = localStorage.getItem("email")
-      const response = await resendOtp(identifier) 
-      if(response?.status === 200 || response?.status === 201){
-        toast.success("A new OTP sent successfully")
-        setTimer(60)
+      setLoading(true);
+      const identifier = localStorage.getItem("email");
+      const response = await resendOtp(identifier);
+      if (response?.status === 200 || response?.status === 201) {
+        toast.success("A new OTP sent successfully");
+        setTimer(60);
       }
     } catch (error) {
-      console.log(error, "from resend otp")
-      
-    }finally{
-      setLoading(false)
+      console.log(error, "from resend otp");
+    } finally {
+      setLoading(false);
     }
-
-  }
+  };
   return (
     <div className="pt-40 px-0">
-    
       <AuthProfile title="Verification Code" />
       <p className="text-[#4B2417] text-sm">
         We have sent a verification code to your email address
       </p>
       <form onSubmit={onSubmitHandler} className="flex py-6 gap-2">
         <input
-         onChange={onChangeHandler}
-          className="bg-white py-2  rounded-md w-10"
+          onChange={onChangeHandler}
+          className="bg-white py-2 text-center rounded-md w-10"
           type="text"
           name="first"
           id=""
@@ -97,7 +94,7 @@ const Verification = ({ title, loading, setLoading }) => {
         />
         <input
           onChange={onChangeHandler}
-          className="bg-white py-2  rounded-md w-10"
+          className="bg-white py-2 text-center rounded-md w-10"
           type="text"
           name="second"
           maxLength={1}
@@ -105,7 +102,7 @@ const Verification = ({ title, loading, setLoading }) => {
         />
         <input
           onChange={onChangeHandler}
-          className="bg-white py-2  rounded-md w-10"
+          className="bg-white py-2 text-center rounded-md w-10"
           type="text"
           name="third"
           maxLength={1}
@@ -113,7 +110,7 @@ const Verification = ({ title, loading, setLoading }) => {
         />
         <input
           onChange={onChangeHandler}
-          className="bg-white py-2  rounded-md w-10"
+          className="bg-white py-2 text-center rounded-md w-10"
           type="text"
           name="fourth"
           maxLength={1}
@@ -121,7 +118,7 @@ const Verification = ({ title, loading, setLoading }) => {
         />
         <input
           onChange={onChangeHandler}
-          className="bg-white py-2  rounded-md w-10"
+          className="bg-white py-2 text-center rounded-md w-10"
           type="text"
           name="fifth"
           maxLength={1}
@@ -129,18 +126,20 @@ const Verification = ({ title, loading, setLoading }) => {
         />
         <input
           onChange={onChangeHandler}
-          className="bg-white py-2  rounded-md w-10"
+          className="bg-white py-2 text-center rounded-md w-10"
           type="text"
           name="sixth"
           maxLength={1}
           value={otp.sixth}
         />
-        <button className="bg-[#4B2417] text-white px-4 py-2 mt-3 rounded-md w-full">Confirm</button>
+        <button className="bg-[#4B2417] text-white px-4 py-2 mt-3 rounded-md w-full">
+          Confirm
+        </button>
       </form>
       <p>
         I didn’t receive a code{" "}
         <span className="font-[800] text-[#4B2417]">
-          <button  onClick={resendOTP}>Resend OTP</button>
+          <button onClick={resendOTP}>Resend OTP</button>
         </span>
       </p>
     </div>
