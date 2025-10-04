@@ -71,7 +71,7 @@ const Earth = () => {
       >
         <div className="bg-black/35 absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start">
           {" "}
-          <h1 className="md:text-4xl lg:w-1/3 md:w-2xl w-3/4 md:leading-11 font-extrabold text-left px-10 text-[#FFFFFFCC] ">
+          <h1 data-aos="fade-right" className="md:text-4xl lg:w-1/3 md:w-2xl w-3/4 md:leading-11 font-extrabold text-left px-10 text-[#FFFFFFCC] ">
             EARTH MEET ARTS. MOULDED WITH CARE
           </h1>{" "}
           <button className="mt-5 mx-10 px-3 md:px-6 py-3 shadow-neutral-50 shadow-md cursor-pointer bg-[#4B2417] text-[#FFFFFFCC] rounded-lg transition">
@@ -79,7 +79,7 @@ const Earth = () => {
           </button>
         </div>
       </div>
-      <div className="px-10 bg-[#F0E0D0]  grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-10 py-10">
+      <div data-aos="fade-right" className="px-10 bg-[#F0E0D0]  grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-10 py-10">
         {
           earths.map((earth) => {
             return (

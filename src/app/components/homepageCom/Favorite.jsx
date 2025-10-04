@@ -52,7 +52,7 @@ const Favourite = () => {
         Discover our customers Favorite
       </h1>
 
-      <div className="lg:px-60 md:px-30 sm:px-20 grid md:grid-cols-3 sm:grid-cols-3 grid-cols-2 sm:gap-10  gap-4 py-10">
+      <div data-aos="fade-up" className="lg:px-60 md:px-30 sm:px-20 grid md:grid-cols-3 sm:grid-cols-3 grid-cols-2 sm:gap-10  gap-4 py-10">
         {favourites.map((favour) => {
           return (
             <div key={favour.id}>

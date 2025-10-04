@@ -79,7 +79,7 @@ const Why = () => {
         <p className="text-[#1C120D] text-base">
           Experience the difference of handmade goods
         </p>
-        <div className="md:grid lg:grid-cols-3  md:grid-cols-2 flex overflow-x-scroll gap-14 py-10">
+        <div  className="md:grid lg:grid-cols-3 md:overflow-hidden md:grid-cols-2 flex overflow-x-scroll gap-14 py-10">
           {products.map((product) => {
             return (
               <div className="flex flex-col items-center" key={product.id}>
@@ -139,7 +139,7 @@ const Why = () => {
 
 const Product = ({ product }) => {
   return (
-    <div className="bg-[#FAFAF7] h-80 sm:h-auto rounded-md shadow-amber-950 shadow-md p-6 space-y-2 border border-[#4B2417] ">
+    <div data-aos="fade-right" className="bg-[#FAFAF7] h-80 sm:h-auto rounded-md shadow-amber-950 shadow-md p-6 space-y-2 border border-[#4B2417] ">
       <div className="text-[#4B2417]">{product.icon}</div>
       <h1 className="font-bold md:text-xl">{product.title}</h1>
       <p className="text-[#94664F] font-medium text-base">{product.desc}</p>
@@ -151,7 +151,7 @@ export default Why;
 
 const Crafts = ({ craft }) => {
   return (
-    <div>
+    <div data-aos="fade-right">
       <Image src={craft.image} alt={craft.title} width={200} />
       <h1 className={`font-bold  text-[#3F2010] ${bricolage.className}`}>{craft.title}</h1>
       <p>{craft.price}</p>

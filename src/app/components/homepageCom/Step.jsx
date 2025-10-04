@@ -32,13 +32,13 @@ const Step = () => {
         <div className="sm:flex px-10 justify-center space-x-4 mt-8">
           <button
             onClick={onClickBuyer}
-            className="mt-5 px-3 md:px-6 py-3 shadow-neutral-50 shadow-md cursor-pointer bg-[#4B2417] text-[#FFFFFFCC] rounded-lg transition"
+            className="mt-5 px-3 md:px-6 py-3 shadow-neutral-50 hover:text-[#4B2417] hover:bg-[#F0E0D0] shadow-md cursor-pointer bg-[#4B2417] text-[#FFFFFFCC] rounded-lg transition"
           >
             SHOP NOW
           </button>
           <button
             onClick={onClickArtisan}
-            className="mt-5 px-3 md:px-6 py-3 border border-[#4B2417] cursor-pointer bg-[#F0E0D0] text-[#4B2417] rounded-lg transition"
+            className="mt-5 px-3 md:px-6 py-3 border hover:shadow-neutral-50 hover:text-[#F0E0D0] hover:bg-[#4B2417] border-[#4B2417] cursor-pointer hover:shadow-md bg-[#F0E0D0] text-[#4B2417] rounded-lg transition"
           >
             SELL ON LOCALLOOM
           </button>

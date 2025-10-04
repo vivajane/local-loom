@@ -89,7 +89,7 @@ const Crafted = () => {
           </button>
         </div>
       </div>
-      <div className="px-10 bg-[#F0E0D0]  grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-10 py-10">
+      <div data-aos="fade-up" className="px-10 bg-[#F0E0D0]  grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-10 py-10">
         {
           earths.map((earth) => {
             return (
