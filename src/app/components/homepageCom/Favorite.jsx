@@ -44,7 +44,7 @@ const favourites = [
 
 const Favourite = () => {
   return (
-    <div className={` px-10 py-10 bg-[#F0E0D0]   ${bricolage.className}`}>
+    <div className={`px-4 md:px-10 py-10 bg-[#F0E0D0]   ${bricolage.className}`}>
       <h1 className="font-extrabold py-2 text-2xl md:text-4xl text-center">
         FAVOURITE PICKS
       </h1>

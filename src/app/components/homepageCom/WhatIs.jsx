@@ -19,7 +19,7 @@ const manrope = Manrope({
 const WhatIs = () => {
   return (
     <div
-      className={`text-[#4B2417] md:flex block  pt-2 pb-10 px-10  items-center justify-between w-full bg-[#866054cc] ${bricolage.className}`}
+      className={`text-[#4B2417] md:flex block  pt-2 pb-10 px-4 md:px-10  items-center justify-between w-full bg-[#866054cc] ${bricolage.className}`}
     >
       <div className=" ">
         <div className="space-y-2 text-center mx-auto">

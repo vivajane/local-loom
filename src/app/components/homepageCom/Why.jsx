@@ -71,7 +71,7 @@ const bricolage = Bricolage_Grotesque({
 });
 const Why = () => {
   return (
-    <div className={`bg-[#F0E0D0] px-10 py-10 ${manrope.className}`}>
+    <div className={`bg-[#F0E0D0] px-4 md:px-10 py-10 ${manrope.className}`}>
       <div>
         <h1 className="font-extrabold py-2 text-2xl md:text-4xl">
           Why Choose LocalLoom?
