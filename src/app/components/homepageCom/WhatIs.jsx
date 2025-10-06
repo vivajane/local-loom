@@ -23,7 +23,7 @@ const WhatIs = () => {
     >
       <div className=" ">
         <div className="space-y-2 text-center mx-auto">
-          <h1 className="font-extrabold text-2xl">WHAT IS LOCALLOOM?</h1>
+          <h1 data-aos="fade-right" className="font-extrabold text-2xl">WHAT IS LOCALLOOM?</h1>
           <p className={`font-bold text-base ${manrope.className}`}>
             Every thread tells a story
           </p>
