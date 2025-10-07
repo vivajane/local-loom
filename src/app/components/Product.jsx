@@ -21,7 +21,12 @@ const Product = (props) => {
     <Link href={`/product/${props.slug}`}>
       <div className={`${bricolage.className} space-y-2`}>
         <div className="relative">
-          <Image src={props.image || "/fallback.png"}  alt={props.name} height={300} width={400} />
+          <Image
+            src={props.image || "/fallback.png"}
+            alt={props.name}
+            height={300}
+            width={400}
+          />
           <span className="absolute top-2 right-4">
             <CiHeart className="text-[#0f0907]" />
           </span>
