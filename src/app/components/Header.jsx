@@ -13,6 +13,7 @@ import AccountModal from "./modals/AccountModal";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaTimes } from "react-icons/fa";
+import CategoryModal from "./modals/CategoryModal";
 
 const jarkata = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ const jarkata = Plus_Jakarta_Sans({
 const Header = () => {
   const [account, setAccount] = useState(false);
   const [show, setShow] = useState(false);
+  const [showCat, setShowCat] = useState(false);
 
   const showAccount = () => {
     setAccount((prev) => !prev);
@@ -29,6 +31,10 @@ const Header = () => {
 
   const clickShow = () => {
     setShow((prev) => !prev);
+  };
+
+  const showCategories = () => {
+    setShowCat((prev) => !prev);
   };
   return (
     <header
@@ -41,9 +47,12 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="md:flex hidden gap-1">
+        <div className="md:flex relative hidden gap-1">
           <h1 className="text-base">Categories</h1>
-          <FaCaretDown size={20} />
+          <div className="cursor-pointer" onClick={showCategories}>
+            <FaCaretDown size={20} />
+          </div>
+          {showCat && <div className="absolute top-10 right-0"><CategoryModal /></div>}
         </div>
 
         <div className=" md:block hidden w-1/3 relative">

@@ -37,7 +37,7 @@ const Product = (props) => {
         <div className="flex items-center justify-between flex-nowrap w-full">
           <div className="flex items-center text-xs gap-1">
             <FaStar className="text-[#F4B400] text-xs" />
-            <h1 className="text-xs sm:text-sm">{props.rating}</h1>
+            <h1 className="text-xs sm:text-sm">{props.average_rating}</h1>
             <p className="text-xs flex sm:text-sm">({props.reviews} reviews)</p>
           </div>
           <div>

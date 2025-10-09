@@ -1,7 +1,7 @@
 import httpClient from "./axios";
 export const getAllProducts = async (data) => {
   try {
-    const response = await httpClient.get("/api/store/products/all/", data);
+    const response = await httpClient.get("/api/store/products/minimal/", data);
     return response;
   } catch (error) {
     if (error.response) {
