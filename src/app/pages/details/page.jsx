@@ -9,7 +9,7 @@ const noto = Noto_Serif({
  
 const DetailsP = () => {
   return (
-    <div className={`${noto.className} w-full md:px-30 sm:px-10 px-6 flex pb-10 pt-40`}>
+    <div className={`${noto.className} bg-[#F0E0D0]  w-full md:px-30 sm:px-10 px-6 flex pb-10 pt-40`}>
       <div className=' md:w-1/2'>
         <Image src={flower} alt="flower"  width={400} height={300} />
       </div>

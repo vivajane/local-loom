@@ -47,8 +47,8 @@ const NotFoundProduct = () => {
     <div
       className={`${newsreader.className} flex pt-30 flex-col justify-center  items-center bg-[#F0E0D0] gap-5`}
     >
-      <div>
-        <div className="py-3">
+      <div className="px-4">
+        <div className="sm:py-3 py-6">
           <Image
             src={notseen}
             width={400}
@@ -76,7 +76,7 @@ const NotFoundProduct = () => {
       >
         {earths.map((earth) => {
           return (
-            <div className="min-w-[200px]" key={earth.id}>
+            <div className="" key={earth.id}>
               <Product {...earth} />
             </div>
           );

@@ -34,13 +34,13 @@ const Product = (props) => {
         <h1 className="text-sm sm:text-  font-bold">{props.name}</h1>
         <p className="text-xs sm:text-sm">₦{props.price}</p>
         <p>{props.location}</p>
-        <div className="flex items-center justify-between flex-nowrap w-full">
+        <div className="md:flex block items-center justify-between flex-nowrap w-full">
           <div className="flex items-center text-xs gap-1">
             <FaStar className="text-[#F4B400] text-xs" />
             <h1 className="text-xs sm:text-sm">{props.average_rating}</h1>
             <p className="text-xs flex sm:text-sm">({props.reviews} reviews)</p>
           </div>
-          <div>
+          <div className="py-2 md:py-0">
             {!hiddenPage && (
               <button className="text-xs bg-[#4B2417] text-white px-2 py-1 rounded-md">
                 Add to Cart
