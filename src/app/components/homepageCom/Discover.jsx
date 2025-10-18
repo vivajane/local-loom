@@ -5,7 +5,7 @@ import { Bricolage_Grotesque } from "next/font/google";
 import Product from "../Product";
 import { useState, useEffect } from "react";
 import { AppContext } from "../Context";
-import Loading from "../Loading";
+import Loading from "../Loading"
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -13,7 +13,8 @@ const bricolage = Bricolage_Grotesque({
 });
 
 const Discover = () => {
-  const { products, setCategory, loading, fetchProducts } =
+  // const [loading, setLoading] = useState(false);
+  const { products, setCategory,fetchProducts } =
     useContext(AppContext);
   useEffect(() => {
     setCategory("woodwork");

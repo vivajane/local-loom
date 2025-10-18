@@ -13,6 +13,7 @@ const bricolage = Bricolage_Grotesque({
 });
 
 const Crafted = () => {
+  // const [loading, setLoading] = useState(false);
   const { products, setCategory, loading, fetchProducts } =
     useContext(AppContext);
   useEffect(() => {

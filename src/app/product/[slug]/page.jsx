@@ -10,19 +10,19 @@ const ProductPage = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const { slug } = use(params);
-  console.log(slug, "slug")
+  console.log(slug, "slug");
 
   useEffect(() => {
-    console.log("11111")
-    if(!slug) return
-   
+    console.log("11111");
+    if (!slug) return;
+
     const fetchSlug = async () => {
-      
       try {
+        setLoading(true);
         const res = await getSlug(slug);
-  
+
         const productData = res?.data;
-        console.log("data from pro", res?.data)
+        console.log("data from pro", res?.data);
         setProduct(productData);
       } catch (error) {
         console.log("error from slug");
@@ -30,11 +30,18 @@ const ProductPage = ({ params }) => {
         setLoading(false);
       }
     };
-    
 
     fetchSlug();
   }, [slug]);
-  
+
+  if (loading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
+
   if (!product) {
     return (
       <div>
@@ -43,12 +50,12 @@ const ProductPage = ({ params }) => {
     );
   }
 
-  return <div>
-    <div className="py-3">
-     
+  return (
+    <div>
+      <div className="py-3"></div>
+      <ProductDetail product={product} />
     </div>
-    <ProductDetail product={product} />
-  </div>;
+  );
 };
 
 export default ProductPage;

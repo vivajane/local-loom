@@ -14,6 +14,7 @@ const bricolage = Bricolage_Grotesque({
 });
 
 const Adornment = () => {
+  // const [loading, setLoading] = useState(false);
   const { products, setCategory,loading, fetchProducts } = useContext(AppContext);
   useEffect(() => {
     setCategory("necklace");

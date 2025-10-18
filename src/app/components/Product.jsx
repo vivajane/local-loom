@@ -16,7 +16,7 @@ const bricolage = Bricolage_Grotesque({
 const Product = (props) => {
   const pathname = usePathname();
   const hiddenPage = pathname.startsWith("/pages/products");
-  console.log("🔍 Product images data:", props.images);
+  console.log("🔍 Product images data:", props.image);
 
  
 

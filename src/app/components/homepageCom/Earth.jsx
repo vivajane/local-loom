@@ -16,7 +16,8 @@ const bricolage = Bricolage_Grotesque({
 
 const Earth = () => {
   const router = useRouter();
-  const { setCategory, fetchProducts,loading, products } = useContext(AppContext);
+  const { setCategory, fetchProducts, products } = useContext(AppContext);
+  // const [loading, setLoading] = useState(true);
   useEffect(() => {
     setCategory("pottery");
     // fetchProducts(1, 6, "pottery");
