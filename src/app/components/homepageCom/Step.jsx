@@ -1,28 +1,45 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import headerImg from "../../../../public/images/header.png";
 import { Bricolage_Grotesque } from "next/font/google";
 import { useRouter } from "next/navigation";
+import { AppContext } from "../Context";
+import Loading from "../Loading";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 const Step = () => {
-    const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const onClickBuyer = () => {
-    router.push("/pages/products");
+    setLoading(true);
     localStorage.setItem("role", "BUYER");
+    setTimeout(() => {
+      router.push("/pages/products");
+    }, 1000);
   };
   const onClickArtisan = () => {
-    router.push("/pages/signup");
+    setLoading(true);
     localStorage.setItem("role", "ARTISAN");
+    setTimeout(() => {
+      router.push("/pages/products");
+    }, 1000);
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loading />
+      </div>
+    );
+  }
   return (
     <div
       className={`${bricolage.className} relative  py-40 bg-cover bg-no-repeat w-full bg-center h-[500px]`}
-      style={{ backgroundImage: `url(${headerImg.src})`}}
+      style={{ backgroundImage: `url(${headerImg.src})` }}
     >
       <div className="bg-black/35 absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start">
         {" "}
@@ -42,7 +59,6 @@ const Step = () => {
           >
             SELL ON LOCALLOOM
           </button>
-         
         </div>
       </div>
     </div>

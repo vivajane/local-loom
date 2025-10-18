@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import Adornment from "./components/homepageCom/Adornment";
 import Crafted from "./components/homepageCom/Crafted";
+import Discover from "./components/homepageCom/Discover";
 import Earth from "./components/homepageCom/Earth";
 import Favourite from "./components/homepageCom/Favorite";
 import StayConnected from "./components/homepageCom/StayConnected";
@@ -15,6 +16,7 @@ export default function Home() {
       <Step/>
       <Why/>
       <Earth/>
+      <Discover/>
       <Adornment/>
       <Crafted/>
       <Favourite/>

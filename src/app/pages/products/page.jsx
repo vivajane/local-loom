@@ -1,28 +1,40 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Newsreader } from "next/font/google";
-import forth from "../../../../public/images/lovecarrier.png";
-import last from "../../../../public/images/paste.png";
-
-import necklacethree from "../../../../public/images/woodentray.png";
-import two from "../../../../public/images/woodenflowevase.png";
 import Product from "@/app/components/Product";
 import { AppContext } from "@/app/components/Context";
+import Loading from "@/app/components/Loading";
 
 const newsreader = Newsreader({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 const ProductPage = () => {
-  const { products, fetchProducts } = useContext(AppContext);
+  const [page, setPage] = useState(1);
+  const limit = 10;
+  const { products, fetchProducts,category, totalPages, loading } =
+    useContext(AppContext);
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    fetchProducts(page, limit,category);
+  }, [page, category]);
 
   console.log("Products:", products);
+ 
+  if (loading) {
+    return (
+      <h1>
+        <Loading />
+      </h1>
+    );
+  }
   return (
-    <div className={`${newsreader.className} bg-[#F0E0D0] sm:px-12 px-4  md:px-24 pt-30`}>
-      <h1 className="text-xl pt-8 font-bold">All Products</h1>
+    <div
+      className={`${newsreader.className} bg-[#F0E0D0] sm:px-12 px-4  md:px-24 pt-30`}
+    >
+      <h1 className="text-xl pt-8 font-semi-bold">
+        All Products{" "}
+        <span className="font-extrabold">/Handmade Ceramic Vase</span>
+      </h1>
       <div className="flex gap-10 md:overflow-hidden overflow-x-scroll py-8 md:py-10">
         <div className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
           <p>Sort: Price (Low to High)</p>
@@ -39,18 +51,45 @@ const ProductPage = () => {
       </div>
       <div className=" grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2  gap-10 py-10">
         {products &&
-          products.map((product) => (
-            <Product
-              key={product.id}
-              image={product.image}
-       
-              name={product.name}
-              price={product.price}
-              location={product.location}
-              average_rating={product.average_rating}
-              reviews={product.reviews}
-            />
-          ))}
+          products.map((product) => {
+            return (
+              <Product
+                key={product.id}
+                image={product.images?.[0]?.image}
+                name={product.name}
+                price={product.price}
+                location={product.location}
+                slug={product.slug}
+                category={product.category}
+                stock_quantity={product.stock_quantity}
+                description={product.description}
+                average_rating={product.average_rating}
+                reviews={product.reviews}
+                storefront={product.storefront}
+              />
+            );
+          })}
+      </div>
+      <div className="flex justify-center py-10 items-center gap-4">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          className="px-4 py-2 border border-[#3F2010] rounded-md bg-[#FBF5EB]"
+        >
+          Previous
+        </button>
+
+        <span className="font-semibold">
+          Page {page} of {totalPages}
+        </span>
+
+        <button
+          disabled={page >= totalPages}
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          className="px-4 py-2 border border-[#3F2010] rounded-md bg-[#FBF5EB]"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

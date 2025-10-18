@@ -1,29 +1,54 @@
 "use client";
-
-import { AppContext } from "@/app/components/Context";
+import React, { use } from "react";
+import { getSlug } from "@/app/components/api/slug";
+import { useState, useEffect } from "react";
 import NotFoundProduct from "@/app/components/NotFoundProduct";
+import Loading from "@/app/components/Loading";
 import ProductDetail from "@/app/components/ProductDetail";
-const { use, useContext } = require("react");
 
-const ProductSlug = ({ params }) => {
-  const { products } = useContext(AppContext);
+const ProductPage = ({ params }) => {
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { slug } = use(params);
-  const product = products.find((item) => item.slug === slug);
-  console.log(product);
-  return (
-    <div>
-      {product ? (
-        <div>
-          <ProductDetail product={product} />
-        </div>
-      ) : (
-        <div>
-          
-          <NotFoundProduct />
-        </div>
-      )}
+  console.log(slug, "slug")
+
+  useEffect(() => {
+    console.log("11111")
+    if(!slug) return
+   
+    const fetchSlug = async () => {
+      
+      try {
+        const res = await getSlug(slug);
+  
+        const productData = res?.data;
+        console.log("data from pro", res?.data)
+        setProduct(productData);
+      } catch (error) {
+        console.log("error from slug");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+
+    fetchSlug();
+  }, [slug]);
+  
+  if (!product) {
+    return (
+      <div>
+        <NotFoundProduct />
+      </div>
+    );
+  }
+
+  return <div>
+    <div className="py-3">
+     
     </div>
-  );
+    <ProductDetail product={product} />
+  </div>;
 };
 
-export default ProductSlug;
+export default ProductPage;

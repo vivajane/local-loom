@@ -13,6 +13,7 @@ import { FaTimes } from "react-icons/fa";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import AccountModal from "./modals/AccountModal";
 import CategoryModal from "./modals/CategoryModal";
+import CategoryHeaderModal from "./modals/CategoryHeaderModal";
 
 const jarkata = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -23,6 +24,16 @@ const Header = () => {
   const [account, setAccount] = useState(false);
   const [showCat, setShowCat] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const [showInput, setShowInput] = useState(false);
+  const [showCategory, setShowCategory] = useState(false);
+
+  const showInputHandler = () => {
+    setShowInput((prev) => !prev);
+  };
+
+  const showCategoryHandler = () => {
+    setShowCategory((prev) => !prev);
+  };
 
   return (
     <header
@@ -32,13 +43,6 @@ const Header = () => {
         {/* Left - Logo */}
         <div className="flex items-center gap-3">
           {/* Mobile Menu Icon */}
-          <div className="md:hidden">
-            {showMobileNav ? (
-              <FaTimes size={24} onClick={() => setShowMobileNav(false)} />
-            ) : (
-              <GiHamburgerMenu size={24} onClick={() => setShowMobileNav(true)} />
-            )}
-          </div>
 
           {/* Logo */}
           <div className="hidden md:block">
@@ -48,16 +52,13 @@ const Header = () => {
           </div>
 
           {/* Mobile Title */}
-          <div className="md:hidden">
-            <Link href="/">
-              <h1 className="text-lg font-bold">LocalLoom</h1>
-            </Link>
-          </div>
         </div>
 
-  
         <div className="hidden md:flex items-center gap-4 flex-1 justify-center relative">
-          <div className="flex items-center gap-1 cursor-pointer" onClick={() => setShowCat(!showCat)}>
+          <div
+            className="flex items-center gap-1 cursor-pointer"
+            onClick={() => setShowCat(!showCat)}
+          >
             <h1 className="text-base font-medium">Categories</h1>
             <FaCaretDown size={18} />
           </div>
@@ -81,7 +82,10 @@ const Header = () => {
         {/* Right - Icons */}
         <div className="hidden md:flex items-center gap-10">
           {/* Account */}
-          <div className="relative cursor-pointer text-center" onClick={() => setAccount(!account)}>
+          <div
+            className="relative cursor-pointer text-center"
+            onClick={() => setAccount(!account)}
+          >
             <MdAccountCircle size={28} className="mx-auto" />
             <h1 className="text-sm font-semibold">My Account</h1>
             {account && <AccountModal />}
@@ -102,18 +106,58 @@ const Header = () => {
       </div>
 
       {/* Mobile Search + Icons */}
-      <div className="md:hidden px-4 pb-4 flex items-center justify-between gap-3">
-        <div className="relative flex-1">
-          <input
-            className="border border-[#4B241780] bg-[#FBF5EB] rounded-full px-4 py-2 w-full placeholder:text-[#6E5A4A]"
-            type="search"
-            placeholder="Search"
+      <div className=" px-4 pb-4 flex items-center justify-between gap-3">
+        <div className="md:hidden flex relative items-center gap-3">
+          <div
+            onClick={showCategoryHandler}
+            className="md:hidden  block "
+          >
+            {showCategory ? (
+              <FaTimes size={24} />
+            ) : (
+              <GiHamburgerMenu size={24} />
+            )}
+          </div>
+          <div className="md:hidden">
+            <Link href="/">
+              <h1 className="text-lg font-bold">LocalLoom</h1>
+            </Link>
+          </div>
+          {showCategory &&  (
+            <div className="left-full top-10  absolute">
+              <CategoryHeaderModal />
+            </div>
+          ) }
+        </div>
+        <div className="relative  ">
+          <IoIosSearch
+            className="relative sm:hidden block"
+            onClick={showInputHandler}
+            size={20}
           />
-          <IoIosSearch className="absolute right-3 top-3" size={20} />
+          {showInput && (
+            <div className="absolute right-full top-10 w-full">
+              <input
+                className="border border-[#4B241780] bg-[#FBF5EB] rounded-full px-4 py-2 w-50 placeholder:text-[#6E5A4A]"
+                type="search"
+                placeholder="Search"
+              />
+            </div>
+          )}
         </div>
 
-        <div className="flex items-center gap-3">
-          <MdAccountCircle size={22} onClick={() => setAccount(!account)} className="cursor-pointer" />
+        <input
+          className="border border-[#4B241780] hidden sm:block md:hidden bg-[#FBF5EB] rounded-full px-4 py-2 w-full placeholder:text-[#6E5A4A]"
+          type="search"
+          placeholder="Search"
+        />
+
+        <div className="flex sm:hidden items-center gap-3">
+          <MdAccountCircle
+            size={22}
+            onClick={() => setAccount(!account)}
+            className="cursor-pointer"
+          />
           <Link href="/support">
             <IoMdHelpCircleOutline size={22} />
           </Link>
