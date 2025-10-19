@@ -9,6 +9,7 @@ import Context from "./components/Context";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -17,17 +18,21 @@ const bricolage = Bricolage_Grotesque({
 
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+  const hidePages = ["/pages/paySuccess" , "/pages/payNotSuccess"];
+  const hiddenPages = hidePages.includes(pathname);
+
   useEffect(() => {
   Aos.init({});
 }, []);
   return (
     <html lang="en">
       <body className={`${bricolage.className}`}>
-        <Header />
+        {!hiddenPages && <Header />}
         <ToastContainer />
         <Context>{children}</Context>
 
-        <Footer />
+        {!hiddenPages && <Footer />}
       </body>
     </html>
   );

@@ -8,7 +8,7 @@ import ProductDetail from "@/app/components/ProductDetail";
 
 const ProductPage = ({ params }) => {
   const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { slug } = use(params);
   console.log(slug, "slug");
 
