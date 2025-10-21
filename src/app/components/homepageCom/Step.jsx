@@ -25,7 +25,7 @@ const Step = () => {
     setLoading(true);
     localStorage.setItem("role", "ARTISAN");
     setTimeout(() => {
-      router.push("/pages/products");
+      router.push("/pages/sellerPages/sellerPage");
     }, 1000);
   };
 
