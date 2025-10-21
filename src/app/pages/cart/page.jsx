@@ -48,7 +48,7 @@ const Cart = () => {
       setQuantity((prev) => prev - 1);
     }
   };
-  if(loading) {
+  if (loading) {
     return (
       <h1>
         <Loading />
@@ -56,9 +56,9 @@ const Cart = () => {
     );
   }
 
- const  onClickHandler = () => {
+  const onClickHandler = () => {
     setLoading(true);
-  }
+  };
 
   return (
     <div
@@ -67,12 +67,17 @@ const Cart = () => {
       <h1 className="text-[#1C120D] font-bold py-4 text-lg ">My Cart</h1>
       <div>
         {carts.map((cart) => (
-          <div className="flex space-y-6 md:space-y-0 md:gap-50 sm:gap-20 gap-10 items-center" key={cart.id}>
-            <div className="md:flex flex-col items-center gap-10">
+          <div
+            className="flex space-y-6 md:space-y-0 md:gap-50 sm:gap-20 gap-10 items-center"
+            key={cart.id}
+          >
+            <div className="md:flex block items-center gap-10">
               <Image src={cart.img} alt={cart.name} width={200} height={150} />
               <div className="space-y-1">
                 <h1 className="md:text-base sm:text-sm text-xs">{cart.name}</h1>
-                <h1 className="text-[#94664F] d:text-base sm:text-sm text-xs">₦{cart.price}</h1>
+                <h1 className="text-[#94664F] d:text-base sm:text-sm text-xs">
+                  ₦{cart.price}
+                </h1>
               </div>
             </div>
             <div className="flex items-center gap-10">
@@ -109,19 +114,25 @@ const Cart = () => {
           <h1>SubTotal</h1>
           <h1>₦7,300</h1>
         </div>
-        <div className="sm:flex flex-col justify-between pt-1 pb-4 gap-4 md:gap-10">
+        <div className="block md:flex  justify-between pt-1 pb-4 gap-4 md:gap-10">
           <div className="py-3 font-bold ">
             <Link href="/pages/checkout">
-              <button onClick={onClickHandler} className="bg-[#3F2010] sm:w-46 md:w-60 text-center text-sm sm:text-base cursor-pointer text-[#FAFAF7] py-2 px-4 rounded-md">
+              <button
+                onClick={onClickHandler}
+                className="bg-[#3F2010] sm:w-46 md:w-60 text-center text-sm sm:text-base cursor-pointer text-[#FAFAF7] py-2 px-4 rounded-md"
+              >
                 CHECKOUT
               </button>
             </Link>
           </div>
           <div className="py-3">
             <Link href="/pages/products">
-            <button onClick={onClickHandler} className="bg-white w-30 sm:w-46 md:w-60 border font-bold border-[#3F2010] text-center cursor-pointer text-[#3F2010] text-sm sm:text-base py-2 px-4 rounded-md">
-              CONTINUE SHOPPING
-            </button>
+              <button
+                onClick={onClickHandler}
+                className="bg-white w-30 sm:w-46 md:w-60 border font-bold border-[#3F2010] text-center cursor-pointer text-[#3F2010] text-sm sm:text-base py-2 px-4 rounded-md"
+              >
+                CONTINUE SHOPPING
+              </button>
             </Link>
           </div>
         </div>
