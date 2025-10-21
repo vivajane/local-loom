@@ -71,12 +71,12 @@ const bricolage = Bricolage_Grotesque({
 });
 const Why = () => {
   return (
-    <div className={`bg-[#F0E0D0] px-10 py-10 ${manrope.className}`}>
+    <div className={`bg-[#F0E0D0] px-4 sm:px-10 py-10 ${manrope.className}`}>
       <div>
-        <h1 className="font-extrabold py-2 text-2xl md:text-4xl">
+        <h1 className="font-extrabold py-2 text-xl sm:text-2xl md:text-4xl">
           Why Choose LocalLoom?
         </h1>
-        <p className="text-[#1C120D] text-base">
+        <p className="text-[#1C120D] text-sm sm:text-base">
           Experience the difference of handmade goods
         </p>
         <div  className="md:grid lg:grid-cols-3 md:overflow-hidden md:grid-cols-2 flex overflow-x-scroll gap-14 py-10">
@@ -139,10 +139,10 @@ const Why = () => {
 
 const Product = ({ product }) => {
   return (
-    <div data-aos="fade-right" className="bg-[#FAFAF7] h-80 sm:h-auto rounded-md shadow-amber-950 shadow-md p-6 space-y-2 border border-[#4B2417] ">
-      <div className="text-[#4B2417]">{product.icon}</div>
-      <h1 className="font-bold md:text-xl">{product.title}</h1>
-      <p className="text-[#94664F] font-medium text-base">{product.desc}</p>
+    <div data-aos="fade-right" className="bg-[#FAFAF7] h-80 sm:h-auto rounded-md shadow-amber-950 shadow-md p-6 space-y-4 md:space-y-2 border border-[#4B2417] ">
+      <div className="text-[#4B2417] text-sm sm:text-base">{product.icon}</div>
+      <h1 className="font-bold sm:text-base text-sm md:text-xl">{product.title}</h1>
+      <p className="text-[#94664F] font-medium text-xs sm:text-sm md:text-base">{product.desc}</p>
     </div>
   );
 };
@@ -153,12 +153,12 @@ const Crafts = ({ craft }) => {
   return (
     <div data-aos="fade-right">
       <Image src={craft.image} alt={craft.title} width={200} />
-      <h1 className={`font-bold  text-[#3F2010] ${bricolage.className}`}>{craft.title}</h1>
-      <p>{craft.price}</p>
+      <h1 className={`font-bold  text-[#3F2010] md:text-base  text-sm ${bricolage.className}`}>{craft.title}</h1>
+      <p className="md:text-base  text-sm">{craft.price}</p>
       <div className="flex items-center gap-2">
         <CiHeart className="text-[#4B2417]" />
 
-        <p>Add to Wishlist</p>
+        <p className="md:text-base  text-sm">Add to Wishlist</p>
       </div>
     </div>
   );

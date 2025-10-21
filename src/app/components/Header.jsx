@@ -13,6 +13,7 @@ import { FaTimes } from "react-icons/fa";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import AccountModal from "./modals/AccountModal";
 import CategoryModal from "./modals/CategoryModal";
+import { useRouter } from "next/navigation";
 import CategoryHeaderModal from "./modals/CategoryHeaderModal";
 
 const jarkata = Plus_Jakarta_Sans({
@@ -26,6 +27,7 @@ const Header = () => {
   const [showMobileNav, setShowMobileNav] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
+  const router = useRouter();
 
   const showInputHandler = () => {
     setShowInput((prev) => !prev);
@@ -34,6 +36,11 @@ const Header = () => {
   const showCategoryHandler = () => {
     setShowCategory((prev) => !prev);
   };
+
+  const addToCart = () => {
+    router.push("/pages/cart");
+
+  }
 
   return (
     <header
@@ -98,8 +105,8 @@ const Header = () => {
           </Link>
 
           {/* Cart */}
-          <Link href="/cart" className="text-center">
-            <FaCartShopping size={28} className="mx-auto" />
+          <Link href="/pages/cart" className="text-center">
+            <FaCartShopping onClick={addToCart} size={28} className="mx-auto" />
             <h1 className="text-sm font-semibold">Cart</h1>
           </Link>
         </div>
@@ -161,7 +168,7 @@ const Header = () => {
           <Link href="/support">
             <IoMdHelpCircleOutline size={22} />
           </Link>
-          <Link href="/cart">
+          <Link href="/pages/cart">
             <FaCartShopping size={22} />
           </Link>
         </div>

@@ -39,7 +39,7 @@ const Adornment = () => {
         <div className="bg-black/35 absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start">
           {" "}
           <h1 className="md:text-4xl lg:w-1/3 md:w-2xl w-3/4 md:leading-11 font-extrabold text-left px-4 md:px-10 text-[#FFFFFFCC] ">
-            Adornment with meaning
+            ADORNMENT WITH MEANING
           </h1>{" "}
           <button
             onClick={seeCategory}

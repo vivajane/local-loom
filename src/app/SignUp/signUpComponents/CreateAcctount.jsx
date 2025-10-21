@@ -26,7 +26,7 @@ const CreateAcctount = ({title, loading, setLoading, checkShow}) => {
   const onChangeHandler = (e) => {
     setDetails({
       ...details,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value 
     })
     console.log(details)
   }

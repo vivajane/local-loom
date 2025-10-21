@@ -31,10 +31,10 @@ const Crafted = () => {
         <div className="bg-[#4B2417]/35 absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start">
           {" "}
           <h1 className="md:text-4xl lg:w-1/2 md:w-2xl w-3/4 md:leading-11 font-extrabold text-left px-4 md:px-10 text-[#FFFFFFCC] ">
-            Crafted from nature, Craved with SOUL
+            CRAFTED FROM NATURE, CRAVED WITH SOUL
           </h1>{" "}
           <button className="mt-5 mx-3 md:mx-10 px-3 md:px-6 py-3 shadow-neutral-50 shadow-md cursor-pointer bg-[#4B2417] text-[#FFFFFFCC] rounded-lg transition">
-            Shop Woodwork and Sculpture
+           SHOP WOODWORK AND SCULPTURE
           </button>
         </div>
       </div>

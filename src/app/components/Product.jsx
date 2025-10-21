@@ -42,7 +42,9 @@ const Product = (props) => {
         </div>
 
         <h1 className="text-sm font-bold">{props.name}</h1>
-        <p className="text-xs sm:text-sm">₦{props.price}</p>
+        <p className="text-xs sm:text-sm">{props.price}</p>
+        <p className="text-xs sm:text-sm">{props.location}</p>
+
 
         <div className="flex items-center text-xs gap-1">
           <FaStar className="text-[#F4B400] text-xs" />

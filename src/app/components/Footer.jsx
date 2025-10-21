@@ -23,9 +23,9 @@ const Footer = () => {
               </Link>
             </div>
             <div className="flex pt-30  text-white gap-10 flex-end ">
-              <FaSquareInstagram />
-              <FaFacebook />
-              <FaSquareXTwitter />
+              <FaSquareInstagram size={30} />
+              <FaFacebook size={30} />
+              <FaSquareXTwitter size={30} />
             </div>
           </div>
 

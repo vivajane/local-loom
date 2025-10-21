@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Work_Sans } from "next/font/google";
 import one from "../../../../public/images/deco.png";
@@ -39,24 +39,23 @@ const favourites = [
 
     location: "Osun, Nigeria",
   },
-
 ];
 
 const OrderDetail = () => {
-    const [loading, setLoading] = useState(false);
-    const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-    const onClickHandler = () => {
-        setLoading(true);
-        router.push("/pages/track")
-    }
-    if (loading) {
-        return (
-          <div className="">
-            <Loading />
-          </div>
-        );
-      }
+  const onClickHandler = () => {
+    setLoading(true);
+    router.push("/pages/track");
+  };
+  if (loading) {
+    return (
+      <div className="">
+        <Loading />
+      </div>
+    );
+  }
   return (
     <div
       className={`sm:pt-34 pt-30 text-xs sm:text-sm md:text-base text-left space-y-4  sm:px-10 px-6 md:px-32 bg-[#F0E0D0] ${worksans.className}`}
@@ -94,28 +93,31 @@ const OrderDetail = () => {
           Items <span>(3)</span>
         </h1>
       </div>
-      <div data-aos="fade-up" className=" grid md:grid-cols-3 sm:grid-cols-3 grid-cols-2 sm:gap-10  gap-4 py-10">
+      <div
+        data-aos="fade-up"
+        className=" grid md:grid-cols-3 sm:grid-cols-3 grid-cols-2 sm:gap-10  gap-4 py-10"
+      >
         {favourites.map((fav) => {
-            return (
-                <Product key={fav.id} title= {fav.title} image={fav.image} />
-            )
+          return <Product key={fav.id} title={fav.title} image={fav.image} />;
         })}
-
       </div>
       <div className="mspace-y-2">
-        <h1 className="font-bold text-[#3F2010] text-sm md:text-sm ">Payment Details</h1>
+        <h1 className="font-bold text-[#3F2010] text-sm md:text-sm ">
+          Payment Details
+        </h1>
         <p className="text-[#8A7361]">Order Total</p>
         <p className="text-[#8A7361]">₦123,500</p>
       </div>
       <div className="space-y-2">
-        <h1 className="font-bold text-[#3F2010] text-sm md:text-sm ">Payment Method</h1>
+        <h1 className="font-bold text-[#3F2010] text-sm md:text-sm ">
+          Payment Method
+        </h1>
         <p className="text-[#8A7361]">Bank Transfer</p>
-       
       </div>
       <div className="flex justify-left pt-1 pb-4 gap-4 md:gap-10">
         <div className="py-3 font-bold ">
-          <button onClick={onClickHandler}
-            
+          <button
+            onClick={onClickHandler}
             className="bg-[#3F2010] w-3w sm:w-46 md:w-60 text-center cursor-pointer text-[#FAFAF7] py-2 px-4 rounded-md"
           >
             TRACK ORDER
