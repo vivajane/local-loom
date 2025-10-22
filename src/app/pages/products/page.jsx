@@ -12,14 +12,20 @@ const newsreader = Newsreader({
 const ProductPage = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
-  const { products, fetchProducts,category, setCategory, totalPages, loading } =
-    useContext(AppContext);
+  const {
+    products,
+    fetchProducts,
+    category,
+    setCategory,
+    totalPages,
+    loading,
+  } = useContext(AppContext);
   useEffect(() => {
-    fetchProducts(page, limit,category);
+    fetchProducts(page, limit, category);
   }, [page, category]);
 
   console.log("Products:", products);
- 
+
   if (loading) {
     return (
       <h1>

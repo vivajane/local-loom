@@ -19,7 +19,7 @@ const bricolage = Bricolage_Grotesque({
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  const hidePages = ["/pages/paySuccess" , "/pages/payNotSuccess"];
+  const hidePages = ["/pages/paySuccess" , "/pages/payNotSuccess", "/pages/login", "/pages/signup"];
   const hiddenPages = hidePages.includes(pathname);
 
   useEffect(() => {

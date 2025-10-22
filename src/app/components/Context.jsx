@@ -15,6 +15,7 @@ const Context = ({ children }) => {
 
   const fetchProducts = async (page = 1, limit = 10, selectedCat = category) => {
     try {
+      setLoading(true);
       const response = await getAllProducts(page, limit, selectedCat);
       console.log("API Response:", response.data);
       setProducts(response.data.results);
