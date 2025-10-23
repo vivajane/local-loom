@@ -40,7 +40,7 @@ const HowItWorks = () => {
                         <work.icon className="text-[#3F2010] text-base md:text-2xl"/>
                     </div>
                     <h1 className="font-bold text-sm sm:text-base">{work.name}</h1>
-                    <p className="text-xs sm:text-base md:text-lg">{work.desc}</p>
+                    <p className="text-xs sm:text-sm">{work.desc}</p>
                 </div>
             ))
         }

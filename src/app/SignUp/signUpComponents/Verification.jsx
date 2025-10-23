@@ -82,56 +82,58 @@ const Verification = ({ title, loading, setLoading }) => {
       <p className="text-[#4B2417] text-sm">
         We have sent a verification code to your email address
       </p>
-      <form onSubmit={onSubmitHandler} className="flex py-6 gap-2">
-        <input
-          onChange={onChangeHandler}
-          className="bg-white py-2 text-center rounded-md w-10"
-          type="text"
-          name="first"
-          id=""
-          maxLength={1}
-          value={otp.first}
-        />
-        <input
-          onChange={onChangeHandler}
-          className="bg-white py-2 text-center rounded-md w-10"
-          type="text"
-          name="second"
-          maxLength={1}
-          value={otp.second}
-        />
-        <input
-          onChange={onChangeHandler}
-          className="bg-white py-2 text-center rounded-md w-10"
-          type="text"
-          name="third"
-          maxLength={1}
-          value={otp.third}
-        />
-        <input
-          onChange={onChangeHandler}
-          className="bg-white py-2 text-center rounded-md w-10"
-          type="text"
-          name="fourth"
-          maxLength={1}
-          value={otp.fourth}
-        />
-        <input
-          onChange={onChangeHandler}
-          className="bg-white py-2 text-center rounded-md w-10"
-          type="text"
-          name="fifth"
-          maxLength={1}
-          value={otp.fifth}
-        />
-        <input
-          onChange={onChangeHandler}
-          className="bg-white py-2 text-center rounded-md w-10"
-          type="text"
-          name="sixth"
-          maxLength={1}
-          value={otp.sixth}
-        />
+      <form onSubmit={onSubmitHandler} className="md:flex py-6 gap-2">
+        <div className="flex gap-2">
+          <input
+            onChange={onChangeHandler}
+            className="bg-white py-2 text-center rounded-md w-10"
+            type="text"
+            name="first"
+            id=""
+            maxLength={1}
+            value={otp.first}
+          />
+          <input
+            onChange={onChangeHandler}
+            className="bg-white py-2 text-center rounded-md w-10"
+            type="text"
+            name="second"
+            maxLength={1}
+            value={otp.second}
+          />
+          <input
+            onChange={onChangeHandler}
+            className="bg-white py-2 text-center rounded-md w-10"
+            type="text"
+            name="third"
+            maxLength={1}
+            value={otp.third}
+          />
+          <input
+            onChange={onChangeHandler}
+            className="bg-white py-2 text-center rounded-md w-10"
+            type="text"
+            name="fourth"
+            maxLength={1}
+            value={otp.fourth}
+          />
+          <input
+            onChange={onChangeHandler}
+            className="bg-white py-2 text-center rounded-md w-10"
+            type="text"
+            name="fifth"
+            maxLength={1}
+            value={otp.fifth}
+          />
+          <input
+            onChange={onChangeHandler}
+            className="bg-white py-2 text-center rounded-md w-10"
+            type="text"
+            name="sixth"
+            maxLength={1}
+            value={otp.sixth}
+          />
+        </div>
         <button className="bg-[#4B2417] text-white px-4 py-2 mt-3 rounded-md w-full">
           Confirm
         </button>

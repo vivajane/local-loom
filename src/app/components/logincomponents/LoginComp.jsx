@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 import { login } from "../api/login";
 import { getProfile } from "../api/profile";
 import { toast } from "react-toastify";
-import { ForgottenPassword } from "../api/forgotPassword";
 
 const LoginComp = ({ title, checkShow, loading, setLoading }) => {
   const [detail, setDetail] = useState({
