@@ -44,7 +44,7 @@ const TrackOrder = () => {
     <div
       className={`sm:pt-34 pt-20 text-left space-y-4  sm:px-10 px-6 md:px-32 bg-[#F0E0D0] ${worksans.className}`}
     >
-      <h1>My Items</h1>
+      <h1 className="font-extrabold md:text-lg  text-base">My Items</h1>
       <div
         data-aos="fade-up"
         className=" grid md:grid-cols-3 sm:grid-cols-3 grid-cols-2 sm:gap-10  gap-4 py-10"

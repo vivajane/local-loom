@@ -13,6 +13,7 @@ import { signup } from "@/app/components/api/signup";
 import { IoHome } from "react-icons/io5";
 import { toast } from "react-toastify";
 
+
 const CreateAcctount = ({ setLoading, checkShow }) => {
   const [details, setDetails] = useState({
     full_name: "",
@@ -25,10 +26,10 @@ const CreateAcctount = ({ setLoading, checkShow }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem("role");
     setUser(storedUser);
-  },[])
+  }, []);
 
   const router = useRouter();
-  
+
   const onChangeHandler = (e) => {
     setDetails({
       ...details,
@@ -76,7 +77,6 @@ const CreateAcctount = ({ setLoading, checkShow }) => {
         password: details.password,
         ...(user === "BUYER" && { email: details.email }),
         ...(user === "ARTISAN" && { phone_number: details.phone_number }),
-
       };
 
       const response = await signup(payLoad);
@@ -101,7 +101,7 @@ const CreateAcctount = ({ setLoading, checkShow }) => {
         <input
           onChange={onChangeHandler}
           value={details.full_name}
-          className="bg-white py-2 px-4 rounded-md w-full"
+          className="bg-white sm:py-1.5 py-1 md:py-2 px-4 rounded-md w-full"
           type="text"
           name="full_name"
           placeholder="Full Name"
@@ -112,7 +112,7 @@ const CreateAcctount = ({ setLoading, checkShow }) => {
           <input
             onChange={onChangeHandler}
             value={details.email}
-            className="bg-white py-2 px-4 rounded-md w-full"
+            className="bg-white py-1 sm:py-1.5 md:py-2 px-4 rounded-md w-full"
             type="email"
             name="email"
             id="email"
@@ -122,8 +122,8 @@ const CreateAcctount = ({ setLoading, checkShow }) => {
           <input
             onChange={onChangeHandler}
             value={details.phone_number}
-            className="bg-white py-2 px-4 rounded-md w-full"
-          type="tel"
+            className="bg-white  sm:py-1.5 py-1 md:py-2 px-4 rounded-md w-full"
+            type="tel"
             name="phone_number"
             id="phone_number"
             placeholder="Enter Your Number"
@@ -131,13 +131,13 @@ const CreateAcctount = ({ setLoading, checkShow }) => {
         )}
         <input
           onChange={onChangeHandler}
-          className="bg-white py-2  px-4 rounded-md w-full"
+          className="bg-white md:py-2 sm:py-1.5 py-1 px-4 rounded-md w-full"
           type="password"
           name="password"
           id="password"
           placeholder="Password"
         />
-        <button className="bg-[#4B2417] text-white px-4 py-2 mt-3 rounded-md w-full">
+        <button className="bg-[#4B2417] text-white px-4 sm:py-1.5 py-1 md:py-2 md:mt-3 sm:mt-2 mt-1 rounded-md w-full">
           Create Account
         </button>
         <p className="text-center">Or</p>
