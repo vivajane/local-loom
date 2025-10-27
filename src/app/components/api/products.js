@@ -4,7 +4,7 @@ export const getAllProducts = async (page = 1, limit = 10, category = null) => {
   try {
     let url = `/api/store/products/all/?page=${page}&limit=${limit}`;
     if (category) {
-      url += `&category=${encodeURIComponent(category)}`;
+      url += `&category_slug=${encodeURIComponent(category)}`;
     }
 
     const response = await httpClient.get(url);

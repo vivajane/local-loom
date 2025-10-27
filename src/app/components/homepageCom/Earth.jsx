@@ -8,6 +8,7 @@ import { Bricolage_Grotesque } from "next/font/google";
 import Product from "../Product";
 import { AppContext } from "../Context";
 import Loading from "../Loading";
+import Link from "next/link";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -15,17 +16,16 @@ const bricolage = Bricolage_Grotesque({
 });
 
 const Earth = () => {
-  const router = useRouter();
-  const { setCategory, fetchProducts, products } = useContext(AppContext);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const { products, setCategory, category, fetchProducts } =
+    useContext(AppContext);
+
   useEffect(() => {
-    setCategory("pottery");
-    // fetchProducts(1, 6, "pottery");
-    // console.log("Fetched Products:", res);
-    fetchProducts(1, 5, "pottery").then((res) => {
-      console.log("Fetched Products:", res);
-    });
-  });
+    const categoryName = "pottery";
+    setCategory(categoryName);
+    fetchProducts(1, 5, categoryName);
+  }, []);
+  if (loading) return <Loading />;
 
   const seeCategory = () => {
     setCategory("pottery");
@@ -33,7 +33,6 @@ const Earth = () => {
       console.log("Fetched Products:", res);
     });
   };
- 
 
   return (
     <div>
@@ -49,19 +48,17 @@ const Earth = () => {
           >
             EARTH MEET ARTS. MOULDED WITH CARE
           </h1>{" "}
-          <button
-            onClick={seeCategory}
-            className="mt-5 mx-3 md:mx-10 px-3 md:px-6 py-3 shadow-neutral-50 shadow-md cursor-pointer bg-[#4B2417] text-[#FFFFFFCC] rounded-lg transition"
-          >
-            Shop Pottery and Ceramics
-          </button>
+          <Link href="/category/pottery">
+            <button className="mt-5 mx-3 md:mx-10 px-3 md:px-6 py-3 shadow-neutral-50 shadow-md cursor-pointer bg-[#4B2417] text-[#FFFFFFCC] rounded-lg transition">
+              Shop Pottery and Ceramics
+            </button>
+          </Link>
         </div>
       </div>
       <div
         data-aos="fade-right"
         className="px-4 md:px-10 bg-[#F0E0D0]  grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-10 py-10"
       >
-        
         {products &&
           products.map((product) => {
             return (

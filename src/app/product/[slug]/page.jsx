@@ -13,9 +13,6 @@ const ProductPage = ({ params }) => {
   console.log(slug, "slug");
 
   useEffect(() => {
-    console.log("11111");
-    if (!slug) return;
-
     const fetchSlug = async () => {
       try {
         setLoading(true);
