@@ -17,14 +17,17 @@ const bricolage = Bricolage_Grotesque({
 
 const Earth = () => {
   const [loading, setLoading] = useState(false);
-  const { products, setCategory, category, fetchProducts } =
-    useContext(AppContext);
-
-  useEffect(() => {
+   const {productCategory, fetchProductCategory } =
+      useContext(AppContext);
     const categoryName = "pottery";
-    setCategory(categoryName);
-    fetchProducts(1, 5, categoryName);
-  }, []);
+    const products = productCategory[categoryName] || [];
+  
+    useEffect(() => {
+      const loadProducts = async () => {
+        await fetchProductCategory(1, 5, categoryName);
+      };
+      loadProducts();
+    }, [categoryName]);
   if (loading) return <Loading />;
 
   const seeCategory = () => {

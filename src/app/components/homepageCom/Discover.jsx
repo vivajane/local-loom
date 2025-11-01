@@ -15,14 +15,17 @@ const bricolage = Bricolage_Grotesque({
 
 const Discover = () => {
   const [loading, setLoading] = useState(false);
-  const { products, setCategory, category, fetchProducts } =
-    useContext(AppContext);
-
-  useEffect(() => {
+   const {productCategory, fetchProductCategory } =
+      useContext(AppContext);
     const categoryName = "baskets";
-    setCategory(categoryName);
-    fetchProducts(1, 5, categoryName);
-  }, []);
+    const products = productCategory[categoryName] || [];
+  
+    useEffect(() => {
+      const loadProducts = async () => {
+        await fetchProductCategory(1, 5, categoryName);
+      };
+      loadProducts();
+    }, [categoryName]);
   if (loading) return <Loading />;
 
   return (

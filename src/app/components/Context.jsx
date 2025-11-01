@@ -10,13 +10,14 @@ const Context = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState(null);
+  const [productCategory, setProductCategory] = useState({});
 
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchProducts = async (page = 1, limit = 10, selectedCat = category) => {
+  const fetchProducts = async (page = 1, limit = 10, fetchedCategory = category, sort_by = "price", sort_order = "asc") => {
     try {
       setLoading(true);
-      const response = await getAllProducts(page, limit, selectedCat);
+      const response = await getAllProducts(page, "", limit, fetchedCategory, sort_by, sort_order);
       console.log("API Response:", response.data);
       setProducts(response.data.results);
       setTotalPages(response.data.count || 1);
@@ -27,11 +28,28 @@ const Context = ({ children }) => {
     }
   };
 
+  const fetchProductCategory = async(page = 1, limit = 10, fetchedCategory = category) => {
+    if(!fetchedCategory) return;
+    try {
+      const response = await getAllProducts(page, limit, fetchedCategory);
+      setProductCategory((prev) =>({
+        ...prev,
+        [fetchedCategory]: response?.data?.results || []
+      }))
+      setTotalPages(response.data.count || 1);
+    } catch (error) {
+      
+    }
+    
+    
+  }
+
   const getCategory = async () => {
     try {
       const res = await fetchCategory(category);
+      console.log("cate",res?.data?.category);
       return res?.data?.category;
-      // console.log("cate",res?.data);
+      
     } catch (error) {
       console.log("error", error);
     }
@@ -46,6 +64,9 @@ const Context = ({ children }) => {
     getCategory,
     category,
     setCategory,
+    productCategory,
+    setProductCategory,
+    fetchProductCategory,
 
     totalPages,
   };

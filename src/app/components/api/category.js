@@ -3,6 +3,7 @@ export const fetchCategory = async (category) => {
   try {
     const res = await httpClient.get(`api/store/products/all/?category=${category}`,
     );
+    console.log("make i see category", res?.data?.results);
     return res.data.results;
   } catch (error) {
     console.error("Error fetching products by category:", error);

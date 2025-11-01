@@ -11,6 +11,8 @@ const newsreader = Newsreader({
 });
 const ProductPage = () => {
   const [page, setPage] = useState(1);
+  const [sortBy, setSortBy] = useState("price");
+  const [sortOrder, setSortOrder] = useState("asc");
   const limit = 10;
   const {
     products,
@@ -21,8 +23,13 @@ const ProductPage = () => {
     loading,
   } = useContext(AppContext);
   useEffect(() => {
-    fetchProducts(page, limit, category);
-  }, [page, category]);
+    fetchProducts(page, limit, category, sortBy, sortOrder);
+  }, [page, category, sortBy, sortOrder]);
+
+  const handleSort = (sortBy, sortOrder) => {
+    setSortBy(sortBy);
+    setSortOrder(sortOrder);
+  };
 
   console.log("Products:", products);
 
@@ -37,21 +44,18 @@ const ProductPage = () => {
     <div
       className={`${newsreader.className} bg-[#F0E0D0] sm:px-12 px-4  md:px-24 pt-30`}
     >
-      <h1 className="text-xl pt-8 font-semi-bold">
-        All Products{" "}
-        <span className="font-extrabold">/Handmade Ceramic Vase</span>
-      </h1>
+      <h1 className="text-xl pt-8 font-semi-bold">All Products </h1>
       <div className="flex gap-10 md:overflow-hidden overflow-x-scroll py-8 md:py-10">
-        <div className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
+        <div onClick={() => handleSort("price", "asc")} className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
           <p>Sort: Price (Low to High)</p>
         </div>
-        <div className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
+        <div onClick={() => handleSort("price", "desc")} className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
           <p>Sort: Price (High to Low)</p>
         </div>
-        <div className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
+        <div onClick={() => handleSort("created_at", "desc")} className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
           <p>Sort: Newest</p>
         </div>
-        <div className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
+        <div onClick={() => handleSort("average_rating", "desc")} className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
           <p>Sort: Best Selling</p>
         </div>
       </div>
@@ -67,10 +71,12 @@ const ProductPage = () => {
                 location={product.location}
                 slug={product.slug}
                 category={product.category}
+                created_at={product.created_at}
                 stock_quantity={product.stock_quantity}
                 description={product.description}
                 average_rating={product.average_rating}
                 reviews={product.reviews}
+                sales_count={product.sales_count}
                 storefront={product.storefront}
               />
             );
