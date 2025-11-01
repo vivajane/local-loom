@@ -14,10 +14,10 @@ const Context = ({ children }) => {
 
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchProducts = async (page = 1, limit = 10, fetchedCategory = category, sort_by = "price", sort_order = "asc") => {
+  const fetchProducts = async (page = 1, limit = 10, fetchedCategory = category) => {
     try {
       setLoading(true);
-      const response = await getAllProducts(page, "", limit, fetchedCategory, sort_by, sort_order);
+      const response = await getAllProducts(page, "", limit, fetchedCategory);
       console.log("API Response:", response.data);
       setProducts(response.data.results);
       setTotalPages(response.data.count || 1);

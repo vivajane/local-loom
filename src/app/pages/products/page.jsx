@@ -11,25 +11,24 @@ const newsreader = Newsreader({
 });
 const ProductPage = () => {
   const [page, setPage] = useState(1);
-  const [sortBy, setSortBy] = useState("price");
-  const [sortOrder, setSortOrder] = useState("asc");
+  // const [sortBy, setSortBy] = useState("price");
+  // const [sortOrder, setSortOrder] = useState("asc");
   const limit = 10;
   const {
     products,
     fetchProducts,
     category,
-    setCategory,
     totalPages,
     loading,
   } = useContext(AppContext);
   useEffect(() => {
-    fetchProducts(page, limit, category, sortBy, sortOrder);
-  }, [page, category, sortBy, sortOrder]);
+    fetchProducts(page, limit, category);
+  }, [page, category]);
 
-  const handleSort = (sortBy, sortOrder) => {
-    setSortBy(sortBy);
-    setSortOrder(sortOrder);
-  };
+  // const handleSort = (sortBy, sortOrder) => {
+  //   setSortBy(sortBy);
+  //   setSortOrder(sortOrder);
+  // };
 
   console.log("Products:", products);
 
@@ -46,16 +45,16 @@ const ProductPage = () => {
     >
       <h1 className="text-xl pt-8 font-semi-bold">All Products </h1>
       <div className="flex gap-10 md:overflow-hidden overflow-x-scroll py-8 md:py-10">
-        <div onClick={() => handleSort("price", "asc")} className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
+        <div  className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
           <p>Sort: Price (Low to High)</p>
         </div>
-        <div onClick={() => handleSort("price", "desc")} className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
+        <div  className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
           <p>Sort: Price (High to Low)</p>
         </div>
-        <div onClick={() => handleSort("created_at", "desc")} className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
+        <div  className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
           <p>Sort: Newest</p>
         </div>
-        <div onClick={() => handleSort("average_rating", "desc")} className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
+        <div className="bg-[#FBF5EB] p-2 border border-[#3F2010] rounded-lg px-4 py-1.5">
           <p>Sort: Best Selling</p>
         </div>
       </div>
