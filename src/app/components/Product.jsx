@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { Bricolage_Grotesque } from "next/font/google";
 import { FaStar } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { seeCart } from "./api/cart";
 import Loading from "./Loading";
+import { AppContext } from "./Context";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -15,33 +16,22 @@ const bricolage = Bricolage_Grotesque({
 });
 
 const Product = (props) => {
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
+  const { addToCart} = useContext(AppContext);
   const [loading, setLoading] = useState(false);
-  const addToCart = async () => {
-    setLoading(true);
-    try {
-      const res = await seeCart(props.id);
-      setCart(res);
-      toast.success("Item added to cart");
-      setLoading(false);
-    } catch (error) {
-      console.log("error from cart ");
-    } finally {
-      setLoading(false);
-    }
-  };
+
   const pathname = usePathname();
   const hiddenPage = pathname.startsWith("/pages/products");
   console.log("🔍 Product images data:", props.image);
+  console.log("Product props:", props);
 
   const onClickHandler = () => {
+    
+
     setLoading(true);
   }
 
-  if(loading){
-    return <div><Loading/></div>
-  }
-
+ 
   return (
     <div className={`${bricolage.className} space-y-2`}>
       <Link onClick={onClickHandler} href={`/product/${props.slug ?? props.id}`}>
@@ -79,7 +69,8 @@ const Product = (props) => {
 
       {hiddenPage && (
         <button
-          onClick={addToCart}
+          onClick={() => addToCart(props.id, 1) }
+          
           className="text-xs bg-[#4B2417] text-white px-2 cursor-pointer py-1 rounded-md"
         >
           {loading ? "Adding..." : "Add to Cart"}

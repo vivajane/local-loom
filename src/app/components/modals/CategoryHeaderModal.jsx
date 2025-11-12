@@ -10,8 +10,8 @@ import Link from "next/link";
 
 const CategoryHeaderModal = () => {
   return (
-    <div className="flex flex-col rounded-xl space-y-3 p-8 gap-4 bg-[#FBF5EB]">
-      <div className="hover:bg-[#F0E0D0] hover:px-4 hover:py-2 hover:rounded-xl flex gap-6 items-center">
+    <div className="flex flex-col h-screen w-96   rounded-xl space-y-12 py-12 px-8 gap-4 bg-[#FBF5EB]">
+      <div className="hover:bg-[#F0E0D0] w-full hover:px-4 hover:py-2 hover:rounded-xl flex gap-6 items-center">
         <IoIosHome />
         <Link href="/">Home</Link>
       </div>

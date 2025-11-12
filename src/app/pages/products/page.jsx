@@ -66,6 +66,7 @@ const ProductPage = () => {
                 key={product.id}
                 image={product.images?.[0]?.image}
                 name={product.name}
+                id={product.id}
                 price={product.price}
                 location={product.location}
                 slug={product.slug}

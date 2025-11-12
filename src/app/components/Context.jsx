@@ -2,6 +2,10 @@
 import { fetchCategory } from "./api/category";
 import { getAllProducts } from "./api/products";
 import React, { createContext, useEffect, useState } from "react";
+import { seeCart } from "./api/cart";
+import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
+
 
 
 export const AppContext = createContext(null);
@@ -10,6 +14,7 @@ const Context = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState(null);
+  const [cart, setCart] = useState([]);
   const [productCategory, setProductCategory] = useState({});
 
   const [totalPages, setTotalPages] = useState(1);
@@ -17,7 +22,7 @@ const Context = ({ children }) => {
   const fetchProducts = async (page = 1, limit = 10, fetchedCategory = category) => {
     try {
       setLoading(true);
-      const response = await getAllProducts(page, "", limit, fetchedCategory);
+      const response = await getAllProducts(page, limit, fetchedCategory);
       console.log("API Response:", response.data);
       setProducts(response.data.results);
       setTotalPages(response.data.count || 1);
@@ -40,8 +45,6 @@ const Context = ({ children }) => {
     } catch (error) {
       
     }
-    
-    
   }
 
   const getCategory = async () => {
@@ -55,6 +58,26 @@ const Context = ({ children }) => {
     }
   };
 
+  const addToCart = async(product, quantity) => {
+    try {
+      const res = await seeCart(product, quantity);
+
+      const cartItem = {
+        ...product, quantity,
+        image: product.images?.[0]?.image || "/images/deco.png",
+        cartId: uuidv4(),
+         price: product.price || 0,
+      }
+      setCart((prev) => [...prev, cartItem]);
+      toast.success("Item added to cart");
+      return res;
+      
+    } catch (error) {
+      
+    }
+
+  }
+
   const contextValue = {
     products,
     fetchProducts,
@@ -67,6 +90,10 @@ const Context = ({ children }) => {
     productCategory,
     setProductCategory,
     fetchProductCategory,
+    addToCart,
+    cart,
+    setCart,
+    cartId: uuidv4(),
 
     totalPages,
   };

@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
 }, []);
   return (
     <html lang="en">
-      <body className={`${bricolage.className}`}>
+      <body  className={`${bricolage.className} max-w-[1440px] mx-auto`}>
         {!hiddenPages && <Header />}
         <ToastContainer />
         <Context>{children}</Context>
