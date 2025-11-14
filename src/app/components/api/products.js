@@ -12,9 +12,9 @@ export const getAllProducts = async (
   
     if (category) url += `&category=${encodeURIComponent(category)}`;
 
-    console.log("Final API URL:", url);
+    // console.log("Final API URL:", url);
     const response = await httpClient.get(url);
-    console.log("✅ API Response:", response.data);
+    // console.log("✅ API Response:", response.data);
     return response;
   } catch (error) {
     if (error.response) {

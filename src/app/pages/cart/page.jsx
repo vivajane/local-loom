@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Newsreader } from "next/font/google";
 import one from "../../../../public/images/deco.png";
 import necklacethree from "../../../../public/images/woodentray.png";
@@ -8,41 +8,37 @@ import Image from "next/image";
 import { MdDelete } from "react-icons/md";
 import Link from "next/link";
 import Loading from "@/app/components/Loading";
-import Context, { AppContext } from "@/app/components/Context";
+import { AppContext } from "@/app/components/Context";
+import { updateCart } from "@/app/components/api/updateCart";
+
 
 const newsreader = Newsreader({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-// const carts = [
-//   {
-//     id: 1,
-//     img: one,
-//     name: "Necklace One",
-//     price: 100,
-//   },
-//   {
-//     id: 2,
-//     img: two,
-//     name: "Necklace Two",
-//     price: 200,
-//   },
-//   {
-//     id: 3,
-//     img: necklacethree,
-//     name: "Necklace Three",
-//     price: 300,
-//   },
-// ];
 const Cart = () => {
-  const { cart, setCart, cartId } = useContext(AppContext);
-  const [quantity, setQuantity] = useState(1);
+  const { cart, setCart, cartId} = useContext(AppContext);
   const [loading, setLoading] = useState(false);
- const increaseCount = (cartId) => {
-  setCart(prev => prev.map(item => 
-    item.cartId === cartId ? { ...item, quantity: item.quantity + 1 } : item
-  ));
+ const increaseCount = async (cartId, productId) => {
+  let newQuantity = 0;
+  setCart((prev) => {
+    const updated = prev.map((item) => {
+      if (item.cartId === cartId) {
+        newQuantity = item.quantity + 1;
+        return { ...item, quantity: newQuantity };
+      }
+      return item;
+    });
+    return updated;
+  });
+
+  try {
+    await updateCart(productId, newQuantity);
+    console.log(`Product ${productId} updated to quantity ${newQuantity}`);
+  } catch (err) {
+    console.log("Error updating cart backend:", err);
+  }
 };
 
 const decreaseCount = (cartId) => {
@@ -57,14 +53,16 @@ const decreaseCount = (cartId) => {
   };
 
   const deleteCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+    setCart((prev) => prev.filter((item) => item.cartId !== id));
   };
 
   const subtotal = cart.reduce((sum, item) => {
-  const price = parseFloat(item?.price || 0); // use item.price directly
+  const price = parseFloat(item?.price || 0); 
   const qty = parseInt(item?.quantity || 1);
   return sum + price * qty;
 }, 0);
+
+
 
   if (loading) {
     return (
@@ -91,7 +89,7 @@ const decreaseCount = (cartId) => {
         ) : (
           cart.map((item) => (
             <div key={item.cartId}
-              className="flex space-y-6 md:space-y-0 md:gap-50 sm:gap-20 gap-10 items-center"
+              className="flex space-y-6 md:space-y-10 md:gap-50 sm:gap-20 gap-10 items-center"
               
             >
               <div className="md:flex block items-center gap-10">
@@ -101,12 +99,12 @@ const decreaseCount = (cartId) => {
                   width={200}
                   height={150}
                 />
-                <div className="space-y-1">
+                <div className="space-y-1 pt-10">
                   <h1 className="md:text-base sm:text-sm text-xs">
                     {item.name}
                   </h1>
                   <h1 className="text-[#94664F] d:text-base sm:text-sm text-xs">
-                    ₦{item.price}
+                    ₦{item.price * item.quantity}
                   </h1>
                 </div>
               </div>
@@ -118,16 +116,16 @@ const decreaseCount = (cartId) => {
                   >
                     -
                   </button>
-                  <span className=" text-center py-1.5">{quantity}</span>
+                  <span className=" text-center py-1.5">{item.quantity}</span>
                   <button
                     className="border-[#3F2010] border px-3 rounded-full aspect-square bg-[#C7B4AB]"
-                    onClick={() => increaseCount(item.cartId)}
+                    onClick={() => increaseCount(item.cartId, item.id)}
                   >
                     +
                   </button>
                 </div>
 
-                <div onClick={() => deleteCart(item.id)}>
+                <div onClick={() => deleteCart(item.cartId)}>
                   <MdDelete size={20} />
                 </div>
               </div>

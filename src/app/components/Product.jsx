@@ -16,36 +16,29 @@ const bricolage = Bricolage_Grotesque({
 });
 
 const Product = (props) => {
-  // const [cart, setCart] = useState([]);
-  const { addToCart} = useContext(AppContext);
+  const { addToCart } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
 
   const pathname = usePathname();
   const hiddenPage = pathname.startsWith("/pages/products");
-  console.log("🔍 Product images data:", props.image);
   console.log("Product props:", props);
 
-  const onClickHandler = () => {
-    
 
-    setLoading(true);
-  }
-
- 
   return (
     <div className={`${bricolage.className} space-y-2`}>
-      <Link onClick={onClickHandler} href={`/product/${props.slug ?? props.id}`}>
-        <div className="relative hover:scale-105 duration-300">
+      <Link
+        
+        href={`/product/${props.slug ?? props.id}`}
+      >
+        <div className="relative  hover:scale-105 duration-300">
           <Image
-            src={props.image || "/images/deco.png"}
+            src={props.image || "/images/placeholder.png"}
             alt={props.name || "product image"}
             width={400}
             height={400}
             priority
-            unoptimized={
-              typeof imageSrc === "string" && imageSrc.startsWith("/")
-            }
-            className="object-cover rounded-md"
+            unoptimized
+            className="object-cover h-[300px] rounded-md"
           />
           <span className="absolute top-2 right-4">
             <CiHeart className="text-[#0f0907]" />
@@ -53,8 +46,8 @@ const Product = (props) => {
         </div>
       </Link>
 
-      <h1 className="text-sm font-bold">{props.name}</h1>
-      <p className="text-xs sm:text-sm">{props.price}</p>
+      <h1 className="text-sm pt-3 font-bold">{props.name}</h1>
+      <p className="text-xs sm:text-sm">₦{props.price}</p>
       <p className="text-xs sm:text-sm">{props.location}</p>
 
       <div className="flex items-center text-xs gap-1">
@@ -69,8 +62,11 @@ const Product = (props) => {
 
       {hiddenPage && (
         <button
-          onClick={() => addToCart(props.id, 1) }
-          
+          onClick={async () => {
+            setLoading(true);
+            await addToCart(props, 1);
+            setLoading(false);
+          }}
           className="text-xs bg-[#4B2417] text-white px-2 cursor-pointer py-1 rounded-md"
         >
           {loading ? "Adding..." : "Add to Cart"}

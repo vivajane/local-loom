@@ -5,8 +5,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { seeCart } from "./api/cart";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-
-
+import { updateCart } from "./api/updateCart";
 
 export const AppContext = createContext(null);
 
@@ -19,7 +18,11 @@ const Context = ({ children }) => {
 
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchProducts = async (page = 1, limit = 10, fetchedCategory = category) => {
+  const fetchProducts = async (
+    page = 1,
+    limit = 10,
+    fetchedCategory = category
+  ) => {
     try {
       setLoading(true);
       const response = await getAllProducts(page, limit, fetchedCategory);
@@ -33,50 +36,71 @@ const Context = ({ children }) => {
     }
   };
 
-  const fetchProductCategory = async(page = 1, limit = 10, fetchedCategory = category) => {
-    if(!fetchedCategory) return;
+  const fetchProductCategory = async (
+    page = 1,
+    limit = 10,
+    fetchedCategory = category
+  ) => {
+    if (!fetchedCategory) return;
     try {
       const response = await getAllProducts(page, limit, fetchedCategory);
-      setProductCategory((prev) =>({
+      setProductCategory((prev) => ({
         ...prev,
-        [fetchedCategory]: response?.data?.results || []
-      }))
+        [fetchedCategory]: response?.data?.results || [],
+      }));
       setTotalPages(response.data.count || 1);
-    } catch (error) {
-      
-    }
-  }
+    } catch (error) {}
+  };
 
   const getCategory = async () => {
     try {
       const res = await fetchCategory(category);
-      console.log("cate",res?.data?.category);
+      console.log("cate", res?.data?.category);
       return res?.data?.category;
-      
     } catch (error) {
       console.log("error", error);
     }
   };
 
-  const addToCart = async(product, quantity) => {
+  const addToCart = async (product, quantity) => {
     try {
-      const res = await seeCart(product, quantity);
+      const res = await seeCart(product.id, quantity);
 
       const cartItem = {
-        ...product, quantity,
-        image: product.images?.[0]?.image || "/images/deco.png",
+        ...product,
+        quantity,
+        image: product.image || "/images/deco.png",
         cartId: uuidv4(),
-         price: product.price || 0,
-      }
+        price: Number(product.price) || 0,
+      };
       setCart((prev) => [...prev, cartItem]);
+      console.log("Added cart item:", cartItem);
       toast.success("Item added to cart");
+      localStorage.setItem("cart", JSON.stringify([...cart, cartItem]));
       return res;
-      
     } catch (error) {
-      
+      console.log("Add to cart error:", error);
     }
+  };
 
-  }
+  
+
+  const updateCartItems = async (productId, quantity) => {
+    try {
+      const response = await updateCart(productId, quantity);
+      console.log("Updated cart items:", response);
+      return response
+    } catch (error) {
+      console.log("Error updating cart items:", error);
+    }
+  };
+
+  useEffect(() => {
+    const saved = localStorage.getItem("cart");
+    if (saved) {
+      setCart(JSON.parse(saved));
+    }
+  }, []);
 
   const contextValue = {
     products,
@@ -91,9 +115,11 @@ const Context = ({ children }) => {
     setProductCategory,
     fetchProductCategory,
     addToCart,
+   
     cart,
     setCart,
     cartId: uuidv4(),
+    updateCartItems,
 
     totalPages,
   };

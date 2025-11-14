@@ -25,10 +25,6 @@ const ProductPage = () => {
     fetchProducts(page, limit, category);
   }, [page, category]);
 
-  // const handleSort = (sortBy, sortOrder) => {
-  //   setSortBy(sortBy);
-  //   setSortOrder(sortOrder);
-  // };
 
   console.log("Products:", products);
 

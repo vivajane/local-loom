@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Noto_Serif } from "next/font/google";
 import RatingChart from "./RatingChart";
 import { CiStar } from "react-icons/ci";
@@ -13,6 +13,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
+import { AppContext } from "./Context";
 
 const noto = Noto_Serif({
   subsets: ["latin"],
@@ -41,6 +42,7 @@ const productOutlet = [
 const ProductDetail = ({ product }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false)
+   const { addToCart} = useContext(AppContext);
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("Product Details");
   const ratingCount = [1, 2, 3, 4, 5].map((numb) => ({
@@ -67,10 +69,6 @@ const ProductDetail = ({ product }) => {
     setTimeout(() => {
       router.push("/pages/checkout");
     })
-  };
-
-  const addToCart = () => {
-    toast.success("Item added to cart");
   };
 
   console.log("Product in ProductDetail:", product);
@@ -174,7 +172,7 @@ const ProductDetail = ({ product }) => {
         <div className="space-y-3">
           <h1 className="text-[#3F2010] pt-3 font-[5]">SKU: {product.sku}</h1>
           <p className="text-[#3F2010] font-[500]">
-            Handcrafted in Lagos, Nigeria
+            Handcrafted in {product.location}
           </p>
           <div className="flex gap-5 items-center">
             <div className="flex items-center gap-2">
@@ -227,7 +225,7 @@ const ProductDetail = ({ product }) => {
               </div>
               <div className="bg-white rounded-full border-[#59260D] border">
                 <button
-                  onClick={addToCart}
+                    onClick={() => addToCart(product.id, 1) }
                   className="px-8 py-1.5 cursor-pointer "
                 >
                   Add to Cart
